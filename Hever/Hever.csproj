@@ -104,6 +104,8 @@
     </Compile>
     <Compile Include="Models\RestaurantTypes.cs" />
     <Compile Include="Models\Restaurant.cs" />
+    <Compile Include="Models\Store.cs" />
+    <Compile Include="Models\StoreTypes.cs" />
     <Compile Include="Models\Users.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

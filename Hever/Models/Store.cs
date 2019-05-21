@@ -15,6 +15,6 @@ namespace Hever.Models
 
         public bool IsAccessible { get; set; }
 
-        public int MyProperty { get; set; }
+        public StoreTypes StoreType { get; set; }
     }
 }

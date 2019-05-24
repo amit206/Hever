@@ -5,5 +5,7 @@
         CoffeePlace,
         Bar,
         IceCream,
+        Chainees,
+        Meat,
     }
 }

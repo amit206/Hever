@@ -2,10 +2,11 @@
 {
     public enum StoreTypes
     {
-        clothes,
-        shoes,
-        glasses,
-        books,
-        home,
+        Clothes,
+        Shoes,
+        Glasses,
+        Books,
+        Home,
+        Sport,
     }
 }

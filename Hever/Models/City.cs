@@ -8,7 +8,7 @@ namespace Hever.Models
     public class City
     {
         public int Id { get; set; }
-        public String Area { get; set; }
+        public AreaTypes Area { get; set; }
         public String CityName { get; set; }
     }
 }

@@ -5,10 +5,10 @@ using System.Web;
 
 namespace Hever.Models
 {
-    public class Cities
+    public class City
     {
         public int Id { get; set; }
-        public String Erea { get; set; }
-        public String City { get; set; }
+        public String Area { get; set; }
+        public String CityName { get; set; }
     }
 }

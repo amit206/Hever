@@ -17,7 +17,19 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                @Html.ActionLink("Application name", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+                @Html.ActionLink("Home", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+
+                @Html.ActionLink("Restaurants", "", "Restaurants", new { area = "" }, new { @class = "navbar-brand" })
+
+                @Html.ActionLink("Stores", "", "Stores", new { area = "" }, new { @class = "navbar-brand" })
+
+                @Html.ActionLink("Users", "", "Users", new { area = "" }, new { @class = "navbar-brand" })
+
+                @Html.ActionLink("Statistics", "", "", new { area = "" }, new { @class = "navbar-brand" })
+
+                @Html.ActionLink("Near me", "", "", new { area = "" }, new { @class = "navbar-brand" })
+
+                @Html.ActionLink("logoff", "", "", new { area = "" }, new { @class = "navbar-brand" })
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">

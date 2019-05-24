@@ -7,5 +7,8 @@
         IceCream,
         Chainees,
         Meat,
+        Italian,
+        Vegi,
+        Fish
     }
 }

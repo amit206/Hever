@@ -134,6 +134,10 @@
     <Compile Include="Migrations\201905240843436_Einor2405.Designer.cs">
       <DependentUpon>201905240843436_Einor2405.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201905240856112_Amit-Users.cs" />
+    <Compile Include="Migrations\201905240856112_Amit-Users.Designer.cs">
+      <DependentUpon>201905240856112_Amit-Users.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\City.cs" />
     <Compile Include="Models\AreaTypes.cs" />
@@ -187,6 +191,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201905240843436_Einor2405.resx">
       <DependentUpon>201905240843436_Einor2405.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201905240856112_Amit-Users.resx">
+      <DependentUpon>201905240856112_Amit-Users.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

@@ -1,0 +1,80 @@
+﻿@model Hever.Models.Restaurant
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>Restaurant</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.City.CityName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.City.CityName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.StreetAndNum)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.StreetAndNum)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.IsAccessible)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.IsAccessible)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.IsKosher)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.IsKosher)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.RestaurantType)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.RestaurantType)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FacebookLink)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FacebookLink)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>

@@ -7,14 +7,11 @@ namespace Hever.Models
 {
     public class Store
     {
-        public int StoreId { get; set; }
-
-        public  String StoreName { get; set; }
-
-        public int Address{ get; set; }
-
+        public int Id { get; set; }
+        public String Name { get; set; }
+        public String City { get; set; }
+        public String StreetAndNum { get; set; }
         public bool IsAccessible { get; set; }
-
         public StoreTypes StoreType { get; set; }
     }
 }

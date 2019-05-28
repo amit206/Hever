@@ -1,16 +1,23 @@
-﻿
+﻿<link href="~/Content/home.css" rel="stylesheet" />
+
 @{
     ViewBag.Title = "Index";
 }
 
-<br />
-@Html.ActionLink("Restaurants", "Index", "Restaurants", new { area = "" }, new { @class = "" })
-<br />
-@Html.ActionLink("Shopping", "Index", "Stores", new { area = "" }, new { @class = "" })
-<br />
-@Html.ActionLink("Recomanded", "Index", "Home", new { area = "" }, new { @class = "" })
-<br />
-@Html.ActionLink("Near you", "Index", "Home", new { area = "" }, new { @class = "" })
-<br />
+<div class="row">
+    <div class="col-sm-6">
+        <a role="button" class="btn btn-success home-btn" href="/Restaurants">Restaurants</a>
+    </div>
+    <div class="col-sm-6">
+        <a role="button" class="btn btn-warning home-btn" href="/Stores">Shopping</a>
+    </div>
+</div>
 
-
+<div class="row">
+    <div class="col-sm-6">
+        <a role="button" class="btn btn-danger home-btn" href="/">Recomanded</a>
+    </div>
+    <div class="col-sm-6">
+        <a role="button" class="btn btn-info home-btn" href="/">Near you</a>
+    </div>
+</div>

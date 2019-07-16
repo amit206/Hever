@@ -17,7 +17,17 @@ namespace Hever.Controllers
         // GET: Users
         public ActionResult Index()
         {
-            return View(db.Users.ToList());
+            var currentUser = ((Users)HttpContext.Session["user"]);
+            if (currentUser != null)
+            {
+                var users = db.Users.Select(s => s);
+                /*if (!currentUser.IsManager)
+                {*/
+                    users = users.Where(u => u.Id == currentUser.Id);
+                //}
+                //return View(users.Include(r => r.Stores).ToList());
+            }
+            return RedirectToAction("Index", "Error");
         }
 
         // GET: Users/Details/5

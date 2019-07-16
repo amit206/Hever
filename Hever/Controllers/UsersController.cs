@@ -24,7 +24,7 @@ namespace Hever.Controllers
                 /*if (!currentUser.IsManager)
                 {*/
                     users = users.Where(u => u.Id == currentUser.Id);
-                //}
+                //} 
                 //return View(users.Include(r => r.Stores).ToList());
             }
             return RedirectToAction("Index", "Error");

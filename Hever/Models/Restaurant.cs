@@ -9,14 +9,11 @@ namespace Hever.Models
     {
         public int Id { get; set; }
         public string Name { get; set; }
-        public string StreetAndNum { get; set; }
+        public string FullAddress { get; set; }
         public bool IsAccessible { get; set; }
         public bool IsKosher { get; set; }
-        public RestaurantTypes RestaurantType { get; set; }
+        public string RestaurantType { get; set; }
         public string FacebookLink { get; set; }
-
-
-        public int CityId { get; set; }
-        public City City { get; set; }
+        public string Area { get; set; }
     }
 }

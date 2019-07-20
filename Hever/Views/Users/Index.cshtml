@@ -1,4 +1,7 @@
 ﻿@model IEnumerable<Hever.Models.Users>
+@{ 
+    Hever.Models.Users activeUser = ((Hever.Models.Users)Session["User"]);
+}
 
 @{
     ViewBag.Title = "Users";

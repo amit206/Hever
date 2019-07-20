@@ -17,7 +17,19 @@ namespace Hever.Controllers
         // GET: Users
         public ActionResult Index()
         {
+            var currentUser = ((Users)HttpContext.Session["user"]);
             return View(db.Users.ToList());
+            //Todo:
+            /*if (currentUser != null)
+            {
+                var users = db.Users.Select(s => s);
+                if (!currentUser.IsManager)
+                {
+                    users = users.Where(u => u.Id == currentUser.Id);
+                //} 
+                return View(users.Include(r => r.UserName).ToList());
+            }
+            return RedirectToAction("Index", "Error");*/
         }
 
         // GET: Users/Details/5
@@ -122,6 +134,35 @@ namespace Hever.Controllers
                 db.Dispose();
             }
             base.Dispose(disposing);
+        }
+
+        // GET: Users/Login
+        public ActionResult Login()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Login(string userName, string password)
+        {
+            var userInDataBase = db.Users.Where(u => u.UserName.Equals(userName, System.StringComparison.Ordinal) &&
+                                                 u.Password.Equals(password, System.StringComparison.Ordinal)).SingleOrDefault();
+                
+            if (userInDataBase != null)
+            {
+                System.Web.HttpContext.Current.Session["user"] = userInDataBase;
+                return RedirectToAction("Index", "Home");
+            }
+
+            ViewBag.ErrMsg = "User name or password are incorrect.";
+            return View();
+        }
+
+        public ActionResult Logout()
+        {
+            System.Web.HttpContext.Current.Session["User"] = null;
+            return RedirectToAction("Login");
         }
     }
 }

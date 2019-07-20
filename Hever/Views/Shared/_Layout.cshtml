@@ -1,61 +1,142 @@
 ﻿@{
-    Hever.Models.Users activeUser = ((Hever.Models.Users)Session["User"]);
+    Hever.Models.Users activeUser = ((Hever.Models.Users)Session["user"]);
 }
+
 <!DOCTYPE html>
 <html>
+
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewBag.Title - HEVER</title>
-    <link href="~/Content/Site.css" rel="stylesheet" type="text/css" />
+    <title>@ViewBag.Title - Hever</title>
+
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+
+    <link href="~/Content/Site.css" rel="stylesheet" type="text/css">
+    <link rel="icon" href="~/Content/Images/favicon.jpg">
     <link href="~/Content/bootstrap.min.css" rel="stylesheet" type="text/css" />
-    <script src="~/Scripts/modernizr-2.6.2.js"></script>
+    <script src="~/Scripts/jquery-1.10.2.js"></script>
 </head>
+
 <body>
-    <div class="navbar navbar-inverse navbar-fixed-top">
-        <div class="container">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                @Html.ActionLink("Home", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
-
-                @Html.ActionLink("Restaurants", "", "Restaurants", new { area = "" }, new { @class = "navbar-brand" })
-
-                @Html.ActionLink("Stores", "", "Stores", new { area = "" }, new { @class = "navbar-brand" })
-
-                @Html.ActionLink("Users", "Index", "Users", new { area = "" }, new { @class = "navbar-brand" })
-
-                @Html.ActionLink("Statistics", "", "", new { area = "" }, new { @class = "navbar-brand" })
-
-                @Html.ActionLink("Near me", "", "", new { area = "" }, new { @class = "navbar-brand" })
-
-                @if (activeUser == null)
-                {
-                    @Html.ActionLink("login", "login", "Users", new { area = "" }, new { @class = "navbar-brand" })
-                }
-                else
-                {
-                    @Html.ActionLink("logout", "logout", "Users", new { area = "" }, new { @class = "navbar-brand" })
-                }
+    <header class="container">
+        <div class="row" id="main-header">
+            <div class="col">
+                @Html.Partial("_LoginPartial")
             </div>
-            <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav"></ul>
+
+            <div class="col-6" id="logo">
+                <div>
+                    <div class="brand">
+                        <img src="~/Content/Images/logo.png" class="logo" alt="">
+                    </div>
+
+                    <div class="address-bar">
+                        Iben Gvirol 100 |
+                        Tel Aviv |
+                        <i class="fa fa-phone-square"></i>
+                        050-8372667
+                    </div>
+                </div>
+            </div>
+
+            <div class="col">
+                <div id="temperatureDiv">
+                    <h4 style="color:black"> Weather in Tel Aviv</h4>
+                    <p style="color:black">Achieving the weather, just a second.</p>
+                </div>
+
+                <script src="~/Scripts/weather.js"></script>
+                <script src="https://query.yahooapis.com/v1/public/yql?q=select item, wind from weather.forecast where woeid in (select woeid from geo.places(1) where text='Rishon LeZion, il') and u='c'&format=json&callback=weatherCallback"></script>
             </div>
         </div>
-    </div>
+    </header>
+
+    <!-- Navigation -->
+    <ul class="nav nav-tabs justify-content-center">
+        <li class="nav-item li-2 px-lg-4">
+            @Html.ActionLink("Home", "Index", "Home")
+        </li>
+
+        @if (activeUser != null)
+        {
+            <li class="nav-item li-2 px-lg-4">
+                @Html.ActionLink("Restaurants", "Index", "Restaurants")
+            </li>
+        }
+
+        @if (activeUser != null)
+        {
+            <li class="nav-item li-2 px-lg-4">
+                @Html.ActionLink("Stores", "Index", "Stores", new { area = "" }, new { @class = "nav-link" })
+            </li>
+        }
+
+        @if (activeUser != null && activeUser.IsAdmin)
+        {
+            <li class="nav-item li-2 px-lg-4">
+                @Html.ActionLink("Users", "Index", "Users", new { area = "" }, new { @class = "nav-link" })
+            </li>
+        }
+
+        @if (activeUser != null && activeUser.IsAdmin)
+        {
+            <li class="nav-item li-2 px-lg-4">
+                @Html.ActionLink("Statistics", "Index", "Statistics", new { area = "" }, new { @class = "nav-link" })
+            </li>
+        }
+
+        <li class="nav-item li-2 px-lg-4">
+            @Html.ActionLink("About", "About", "")
+        </li>
+
+        <li class="nav-item li-2 px-lg-4">
+            @Html.ActionLink("Contact", "Contact", "Home")
+        </li>
+    </ul>
 
     <div class="container body-content">
         @RenderBody()
-        <hr />
+
         <footer>
-            <p>&copy; @DateTime.Now.Year - HEVER</p>
+            <div class="col-lg-12">
+                <p>@DateTime.Now.Year - Hever</p>
+            </div>
         </footer>
     </div>
 
-    <script src="~/Scripts/jquery-1.10.2.min.js"></script>
-    <script src="~/Scripts/bootstrap.min.js"></script>
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+
+
+    <script>
+        $('.carousel').carousel({
+            interval: 4000 //changes the speed
+        })
+    </script>
+
+    <script>
+        $(".ul li").on("click", function () {
+            $(this).siblings().removeClass('active');
+            $(this).addClass("active");
+        });
+
+    </script>
+
+    <script>
+        $(document).ready(function () {
+            $(window).scroll(function () {
+                if ($(window).scrollTop() > 286) {
+                    $('#MainNav').addClass('navbar-fixed-top');
+                }
+                if ($(window).scrollTop() < 287) {
+                    $('#MainNav').removeClass('navbar-fixed-top');
+                }
+            });
+        });
+    </script>
 </body>
 </html>
+

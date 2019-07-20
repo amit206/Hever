@@ -127,6 +127,28 @@ namespace Hever.Controllers
             return RedirectToAction("Index");
         }
 
+        public ActionResult Login()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Login(string userName, string password)
+        {
+            var userInDataBase = db.Users.Where(u =>
+                        u.UserName.Equals(userName, System.StringComparison.Ordinal) &&
+                        u.Password.Equals(password, System.StringComparison.Ordinal)).SingleOrDefault();
+            if (userInDataBase != null)
+            {
+                System.Web.HttpContext.Current.Session["user"] = userInDataBase;
+                return RedirectToAction("Index", "Home");
+            }
+
+            ViewBag.ErrMsg = "User name or password are incorrect.";
+            return View();
+        }
+
         protected override void Dispose(bool disposing)
         {
             if (disposing)

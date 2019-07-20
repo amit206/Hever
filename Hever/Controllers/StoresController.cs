@@ -17,9 +17,37 @@ namespace Hever.Controllers
         // GET: Stores
         public ActionResult Index()
         {
-            var stores = db.Stores.Include(s => s.City);
-            return View(stores.ToList());
+            ViewBag.storeTypeList = db.Stores.Select(s => s.StoreType).Distinct();
+            ViewBag.areaList = db.Stores.Select(s => s.Area).Distinct();
+            return View(db.Stores.ToList());
         }
+
+        // GET: Fabric/Search
+        public ActionResult Search(string storeType = null, string area = null, bool accessible = false)
+        {
+            ViewBag.storeTypeList = db.Stores.Select(s => s.StoreType).Distinct();
+            ViewBag.areaList = db.Stores.Select(s => s.Area).Distinct(); 
+
+            var returnDataQurey = db.Stores.Select(s => s);
+
+            if (accessible)
+            {
+                returnDataQurey = returnDataQurey.Where(s => s.IsAccessible);
+            }
+
+            if (!string.IsNullOrEmpty(storeType))
+            {
+                returnDataQurey = returnDataQurey.Where(s => s.StoreType.Equals(storeType));
+            }
+
+            if (!string.IsNullOrEmpty(area))
+            {
+                returnDataQurey = returnDataQurey.Where(s => s.Area.Equals(area));
+            }
+
+            return View("Index", returnDataQurey.ToList());
+        }
+
 
         // GET: Stores/Details/5
         public ActionResult Details(int? id)
@@ -39,7 +67,6 @@ namespace Hever.Controllers
         // GET: Stores/Create
         public ActionResult Create()
         {
-            ViewBag.CityId = new SelectList(db.Cities, "Id", "CityName");
             return View();
         }
 
@@ -57,7 +84,6 @@ namespace Hever.Controllers
                 return RedirectToAction("Index");
             }
 
-            ViewBag.CityId = new SelectList(db.Cities, "Id", "CityName", store.CityId);
             return View(store);
         }
 
@@ -73,7 +99,6 @@ namespace Hever.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.CityId = new SelectList(db.Cities, "Id", "CityName", store.CityId);
             return View(store);
         }
 
@@ -90,7 +115,6 @@ namespace Hever.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.CityId = new SelectList(db.Cities, "Id", "CityName", store.CityId);
             return View(store);
         }
 

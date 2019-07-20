@@ -219,7 +219,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\RouteConfig.cs" />
-    <Compile Include="Controllers\CitiesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\RestaurantsController.cs" />
@@ -240,14 +239,18 @@
     <Compile Include="Migrations\201905240856112_Amit-Users.Designer.cs">
       <DependentUpon>201905240856112_Amit-Users.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201907191038169_einor1907.cs" />
+    <Compile Include="Migrations\201907191038169_einor1907.Designer.cs">
+      <DependentUpon>201907191038169_einor1907.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201907191343154_einor.cs" />
+    <Compile Include="Migrations\201907191343154_einor.Designer.cs">
+      <DependentUpon>201907191343154_einor.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
-    <Compile Include="Models\City.cs" />
-    <Compile Include="Models\AreaTypes.cs" />
     <Compile Include="Models\HeverDbContext.cs" />
-    <Compile Include="Models\RestaurantTypes.cs" />
     <Compile Include="Models\Restaurant.cs" />
     <Compile Include="Models\Store.cs" />
-    <Compile Include="Models\StoreTypes.cs" />
     <Compile Include="Models\Users.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -272,11 +275,6 @@
     <Content Include="Views\Users\Details.cshtml" />
     <Content Include="Views\Users\Edit.cshtml" />
     <Content Include="Views\Users\Index.cshtml" />
-    <Content Include="Views\Cities\Create.cshtml" />
-    <Content Include="Views\Cities\Delete.cshtml" />
-    <Content Include="Views\Cities\Details.cshtml" />
-    <Content Include="Views\Cities\Edit.cshtml" />
-    <Content Include="Views\Cities\Index.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Login\Index.cshtml" />
     <None Include="Web.Debug.config">
@@ -298,6 +296,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201905240856112_Amit-Users.resx">
       <DependentUpon>201905240856112_Amit-Users.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201907191038169_einor1907.resx">
+      <DependentUpon>201907191038169_einor1907.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201907191343154_einor.resx">
+      <DependentUpon>201907191343154_einor.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

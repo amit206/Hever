@@ -11,6 +11,5 @@ namespace Hever.Models
         public DbSet<Restaurant> Restaurants { get; set; }
         public DbSet<Store> Stores { get; set; }
         public DbSet<Users> Users { get; set; }
-        public DbSet<City> Cities { get; set; }
     }
 }

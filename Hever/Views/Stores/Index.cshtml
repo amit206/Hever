@@ -9,16 +9,57 @@
 <p>
     @Html.ActionLink("Create New", "Create")
 </p>
+
+<div class="container">
+    @using (Html.BeginForm("Search", "Stores", FormMethod.Get))
+    {
+    <form class="form-inline">
+        <div class="form-group col-md-2">
+            <div>
+                <select class="form-control" name="storeType">
+                    <option id="grayOption" value="" selected>Select Store Type</option>
+                    @foreach (var name in ViewBag.storeTypeList)
+                    {
+                        <option value="@name">@name</option>
+                    }
+                </select>
+            </div>
+        </div>
+        <div class="form-group col-md-2">
+            <div>
+                <select class="form-control" name="area">
+                    <option id="grayOption" value="" selected>Select Area</option>
+                    @foreach (var area in ViewBag.areaList)
+                    {
+                        <option value="@area">@area</option>
+                    }
+                </select>
+            </div>
+        </div>
+        <div class="form-group col-md-2">
+            <div>
+                <input type="checkbox" name="accessible" value="true"/>
+                <span>Accessible only</span>
+            </div>
+        </div>
+        <div class="form-group col-md-3">
+            <button type="submit" class="btn btn-info">
+                <span class="glyphicon glyphicon-search">
+                    Search
+                </span>
+            </button>
+        </div>
+    </form>
+    }
+</div>
+
 <table class="table">
     <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.City.CityName)
-        </th>
         <th>
             @Html.DisplayNameFor(model => model.Name)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.StreetAndNum)
+            @Html.DisplayNameFor(model => model.FullAddress)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.IsAccessible)
@@ -29,29 +70,27 @@
         <th></th>
     </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.City.CityName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Name)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.StreetAndNum)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.IsAccessible)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.StoreType)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
-            @Html.ActionLink("Details", "Details", new { id=item.Id }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.Id })
-        </td>
-    </tr>
-}
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FullAddress)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IsAccessible)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.StoreType)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
+                @Html.ActionLink("Details", "Details", new { id = item.Id }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+            </td>
+        </tr>
+    }
 
 </table>

@@ -1,4 +1,8 @@
-﻿<!DOCTYPE html>
+﻿@{
+    Hever.Models.Users activeUser = ((Hever.Models.Users)Session["user"]);
+}
+
+<!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8" />
@@ -19,21 +23,42 @@
                 </button>
                 @Html.ActionLink("Home", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
 
-                @Html.ActionLink("Restaurants", "", "Restaurants", new { area = "" }, new { @class = "navbar-brand" })
+                @if (activeUser != null)
+                {
+                    @Html.ActionLink("Restaurants", "", "Restaurants", new { area = "" }, new { @class = "navbar-brand" })
 
-                @Html.ActionLink("Stores", "", "Stores", new { area = "" }, new { @class = "navbar-brand" })
+                    @Html.ActionLink("Stores", "", "Stores", new { area = "" }, new { @class = "navbar-brand" })
+                }
 
-                @Html.ActionLink("Users", "", "Users", new { area = "" }, new { @class = "navbar-brand" })
+                @if (activeUser != null && activeUser.IsAdmin)
+                {
+                    @Html.ActionLink("Users", "", "Users", new { area = "" }, new { @class = "navbar-brand" })
 
-                @Html.ActionLink("Statistics", "", "", new { area = "" }, new { @class = "navbar-brand" })
+                    @Html.ActionLink("Statistics", "", "", new { area = "" }, new { @class = "navbar-brand" })
+                }
 
-                @Html.ActionLink("Near me", "", "", new { area = "" }, new { @class = "navbar-brand" })
+                @Html.ActionLink("About", "", "", new { area = "" }, new { @class = "navbar-brand" })
 
-                @Html.ActionLink("login", "", "Login", new { area = "" }, new { @class = "navbar-brand" })
+                @Html.ActionLink("Contact", "", "", new { area = "" }, new { @class = "navbar-brand" })
+
+
+                @if (activeUser == null)
+                {
+                    @Html.ActionLink("Register", "", "Users/Create", new { area = "" }, new { @class = "navbar-brand" })
+
+                    @Html.ActionLink("Login", "", "Users/Login", new { area = "" }, new { @class = "navbar-brand" })
+                }
+                else
+                {
+                    @Html.ActionLink("Logoff", "", "Users/Logout", new { area = "" }, new { @class = "navbar-brand" })
+
+                    <span style="color: white !important; font-size: 16px; pointer-events: none;">
+                        Welcome @(activeUser.UserName)
+                    </span>
+                }
             </div>
             <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
-                </ul>
+                <ul class="nav navbar-nav"></ul>
             </div>
         </div>
     </div>

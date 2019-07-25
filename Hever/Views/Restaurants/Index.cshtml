@@ -1,61 +1,65 @@
 ﻿@model IEnumerable<Hever.Models.Restaurant>
 
 @{
+    Hever.Models.Users activeUser = ((Hever.Models.Users)Session["user"]);
     ViewBag.Title = "Restaurant";
 }
 
 <h2>Index</h2>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
+@if (activeUser != null && activeUser.IsAdmin)
+{
+    <p>
+        @Html.ActionLink("Create New", "Create")
+    </p>
+}
 
 <div class="container">
     @using (Html.BeginForm("Search", "Restaurants", FormMethod.Get))
     {
-    <form class="form-inline">
-        <div class="form-group col-md-2">
-            <div>
-                <select class="form-control" name="restaurantType">
-                    <option id="grayOption" value="" selected>Select Store Type</option>
-                    @foreach (var name in ViewBag.restaurantTypeList)
-                    {
-                        <option value="@name">@name</option>
-                    }
-                </select>
+        <form class="form-inline">
+            <div class="form-group col-md-2">
+                <div>
+                    <select class="form-control" name="restaurantType">
+                        <option id="grayOption" value="" selected>Select Store Type</option>
+                        @foreach (var name in ViewBag.restaurantTypeList)
+                        {
+                            <option value="@name">@name</option>
+                        }
+                    </select>
+                </div>
             </div>
-        </div>
-        <div class="form-group col-md-2">
-            <div>
-                <select class="form-control" name="area">
-                    <option id="grayOption" value="" selected>Select Area</option>
-                    @foreach (var area in ViewBag.areaList)
-                    {
-                        <option value="@area">@area</option>
-                    }
-                </select>
+            <div class="form-group col-md-2">
+                <div>
+                    <select class="form-control" name="area">
+                        <option id="grayOption" value="" selected>Select Area</option>
+                        @foreach (var area in ViewBag.areaList)
+                        {
+                            <option value="@area">@area</option>
+                        }
+                    </select>
+                </div>
             </div>
-        </div>
-        <div class="form-group col-md-2">
-            <div>
-                <input type="checkbox" name="kosher" value="true" />
-                <span>Kosher only</span>
+            <div class="form-group col-md-2">
+                <div>
+                    <input type="checkbox" name="kosher" value="true" />
+                    <span>Kosher only</span>
+                </div>
             </div>
-        </div>
-        <div class="form-group col-md-2">
-            <div>
-                <input type="checkbox" name="accessible" value="true" />
-                <span>Accessible only</span>
+            <div class="form-group col-md-2">
+                <div>
+                    <input type="checkbox" name="accessible" value="true" />
+                    <span>Accessible only</span>
+                </div>
             </div>
-        </div>
-        <div class="form-group col-md-3">
-            <button type="submit" class="btn btn-info">
-                <span class="glyphicon glyphicon-search">
-                    Search
-                </span>
-            </button>
-        </div>
-    </form>
+            <div class="form-group col-md-3">
+                <button type="submit" class="btn btn-info">
+                    <span class="glyphicon glyphicon-search">
+                        Search
+                    </span>
+                </button>
+            </div>
+        </form>
     }
 </div>
 
@@ -82,32 +86,37 @@
         <th></th>
     </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Name)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.FullAddress)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.IsAccessible)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.IsKosher)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.RestaurantType)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.FacebookLink)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
-            @Html.ActionLink("Details", "Details", new { id=item.Id }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.Id })
-        </td>
-    </tr>
-}
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FullAddress)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IsAccessible)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IsKosher)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.RestaurantType)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FacebookLink)
+            </td>
+            @if (activeUser != null && activeUser.IsAdmin)
+            {
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
+                    @Html.ActionLink("Details", "Details", new { id = item.Id }) |
+                    @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+
+                </td>
+            }
+        </tr>
+    }
 
 </table>

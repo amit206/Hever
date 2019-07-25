@@ -1,55 +1,59 @@
 ﻿@model IEnumerable<Hever.Models.Store>
 
 @{
+    Hever.Models.Users activeUser = ((Hever.Models.Users)Session["user"]);
     ViewBag.Title = "Stores";
 }
 
 <h2>Index</h2>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
+@if (activeUser != null && activeUser.IsAdmin)
+{
+    <p>
+        @Html.ActionLink("Create New", "Create")
+    </p>
+}
 
 <div class="container">
     @using (Html.BeginForm("Search", "Stores", FormMethod.Get))
     {
-    <form class="form-inline">
-        <div class="form-group col-md-2">
-            <div>
-                <select class="form-control" name="storeType">
-                    <option id="grayOption" value="" selected>Select Store Type</option>
-                    @foreach (var name in ViewBag.storeTypeList)
-                    {
-                        <option value="@name">@name</option>
-                    }
-                </select>
+        <form class="form-inline">
+            <div class="form-group col-md-2">
+                <div>
+                    <select class="form-control" name="storeType">
+                        <option id="grayOption" value="" selected>Select Store Type</option>
+                        @foreach (var name in ViewBag.storeTypeList)
+                        {
+                            <option value="@name">@name</option>
+                        }
+                    </select>
+                </div>
             </div>
-        </div>
-        <div class="form-group col-md-2">
-            <div>
-                <select class="form-control" name="area">
-                    <option id="grayOption" value="" selected>Select Area</option>
-                    @foreach (var area in ViewBag.areaList)
-                    {
-                        <option value="@area">@area</option>
-                    }
-                </select>
+            <div class="form-group col-md-2">
+                <div>
+                    <select class="form-control" name="area">
+                        <option id="grayOption" value="" selected>Select Area</option>
+                        @foreach (var area in ViewBag.areaList)
+                        {
+                            <option value="@area">@area</option>
+                        }
+                    </select>
+                </div>
             </div>
-        </div>
-        <div class="form-group col-md-2">
-            <div>
-                <input type="checkbox" name="accessible" value="true"/>
-                <span>Accessible only</span>
+            <div class="form-group col-md-2">
+                <div>
+                    <input type="checkbox" name="accessible" value="true" />
+                    <span>Accessible only</span>
+                </div>
             </div>
-        </div>
-        <div class="form-group col-md-3">
-            <button type="submit" class="btn btn-info">
-                <span class="glyphicon glyphicon-search">
-                    Search
-                </span>
-            </button>
-        </div>
-    </form>
+            <div class="form-group col-md-3">
+                <button type="submit" class="btn btn-info">
+                    <span class="glyphicon glyphicon-search">
+                        Search
+                    </span>
+                </button>
+            </div>
+        </form>
     }
 </div>
 
@@ -85,11 +89,14 @@
             <td>
                 @Html.DisplayFor(modelItem => item.StoreType)
             </td>
-            <td>
-                @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
-                @Html.ActionLink("Details", "Details", new { id = item.Id }) |
-                @Html.ActionLink("Delete", "Delete", new { id = item.Id })
-            </td>
+            @if (activeUser != null && activeUser.IsAdmin)
+            {
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
+                    @Html.ActionLink("Details", "Details", new { id = item.Id }) |
+                    @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+                </td>
+            }
         </tr>
     }
 

@@ -38,7 +38,22 @@ namespace Hever.Controllers
         // GET: Users/Create
         public ActionResult Create()
         {
-            return View();
+            var currentUser = ((Users)HttpContext.Session["user"]);
+            if (currentUser == null)
+            {
+                return View();
+            }
+            else
+            {
+                if (currentUser.IsAdmin)
+                {
+                    return View();
+                }
+                else
+                {
+                    return RedirectToAction("Index", "Error", new { message = "you are already logged in" });
+                }
+            }
         }
 
         // POST: Users/Create
@@ -46,16 +61,30 @@ namespace Hever.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,UserName,Password,IsAdmine,CardNumber,CardExpirationDate,Cvs")] Users users)
+        public ActionResult Create([Bind(Include = "Id,UserName,Password")] Users user)
         {
             if (ModelState.IsValid)
             {
-                db.Users.Add(users);
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                if (db.Users.Where(c => c.UserName.Equals(user.UserName)).Count() > 0)
+                {
+                    ViewBag.ErrMsg = "User name already exists, please try again";
+                }
+                else
+                {
+                    db.Users.Add(user);
+                    db.SaveChanges();
+                    if (System.Web.HttpContext.Current.Session["user"] == null)
+                    {
+                        System.Web.HttpContext.Current.Session["user"] = user;
+                        return RedirectToAction("Index", "Stores");
+                    }
+                    else
+                    {
+                        return RedirectToAction("Index");
+                    }
+                }
             }
-
-            return View(users);
+            return View(user);
         }
 
         // GET: Users/Edit/5
@@ -71,6 +100,26 @@ namespace Hever.Controllers
                 return HttpNotFound();
             }
             return View(users);
+        }
+
+        // GET: Users/MakeAdmine/5
+        public ActionResult MakeAdmin(bool isAdmin, int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
+            Users user = db.Users.Find(id);
+            if (user == null)
+            {
+                return HttpNotFound();
+            }
+
+            user.IsAdmin = !isAdmin;
+            db.SaveChanges();
+
+            return RedirectToAction("Index");
         }
 
         // POST: Users/Edit/5
@@ -122,6 +171,35 @@ namespace Hever.Controllers
                 db.Dispose();
             }
             base.Dispose(disposing);
+        }
+
+        // GET: Users/Login
+        public ActionResult Login()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Login(string userName, string password)
+        {
+            var userInDataBase = db.Users.Where(u => u.UserName.Equals(userName, System.StringComparison.Ordinal) &&
+                                                 u.Password.Equals(password, System.StringComparison.Ordinal)).SingleOrDefault();
+
+            if (userInDataBase != null)
+            {
+                System.Web.HttpContext.Current.Session["user"] = userInDataBase;
+                return RedirectToAction("Index", "Home");
+            }
+
+            ViewBag.ErrMsg = "User name or password are incorrect.";
+            return View();
+        }
+
+        public ActionResult Logout()
+        {
+            System.Web.HttpContext.Current.Session["User"] = null;
+            return RedirectToAction("Login");
         }
     }
 }

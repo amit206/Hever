@@ -141,9 +141,6 @@ namespace Hever.Controllers
         // GET: Users/Search
         public ActionResult Search(string username = null, string isAdmin = "dont filter")
         {
-            ViewBag.storeTypeList = db.Stores.Select(s => s.StoreType).Distinct();
-            ViewBag.areaList = db.Stores.Select(s => s.Area).Distinct();
-
             var returnDataQurey = db.Users.Select(u => u);
 
             if (isAdmin != "dont filter")

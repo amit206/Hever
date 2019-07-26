@@ -256,6 +256,10 @@
     <Compile Include="Migrations\201907251557056_Migration34.Designer.cs">
       <DependentUpon>201907251557056_Migration34.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201907260846206_Migration36.cs" />
+    <Compile Include="Migrations\201907260846206_Migration36.Designer.cs">
+      <DependentUpon>201907260846206_Migration36.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\HeverDbContext.cs" />
     <Compile Include="Models\Restaurant.cs" />
@@ -318,6 +322,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201907251557056_Migration34.resx">
       <DependentUpon>201907251557056_Migration34.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201907260846206_Migration36.resx">
+      <DependentUpon>201907260846206_Migration36.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

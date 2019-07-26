@@ -158,7 +158,6 @@ namespace Hever.Controllers
         // GET: Restaurants/Like/5
         public ActionResult Like(int? id)
         {
-
             ViewBag.restaurantTypeList = db.Restaurants.Select(r => r.RestaurantType).Distinct();
             ViewBag.areaList = db.Restaurants.Select(r => r.Area).Distinct();
 

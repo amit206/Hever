@@ -19,6 +19,12 @@ namespace Hever.Controllers
         {
             ViewBag.storeTypeList = db.Stores.Select(s => s.StoreType).Distinct();
             ViewBag.areaList = db.Stores.Select(s => s.Area).Distinct();
+            var currentUser = (Users)HttpContext.Session["user"];
+            if (currentUser != null)
+            {
+                var userFromDb = db.Users.Find(currentUser.Id);
+                ViewBag.Liked = userFromDb.LikedStores;
+            }
             return View(db.Stores.ToList());
         }
 
@@ -142,6 +148,41 @@ namespace Hever.Controllers
             db.Stores.Remove(store);
             db.SaveChanges();
             return RedirectToAction("Index");
+        }
+        // GET: Stores/Like/5
+        public ActionResult Like(int? id)
+        {
+            ViewBag.storeTypeList = db.Stores.Select(s => s.StoreType).Distinct();
+            ViewBag.areaList = db.Stores.Select(s => s.Area).Distinct();
+
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Store store = db.Stores.Find(id);
+            if (store == null)
+            {
+                return HttpNotFound();
+            }
+
+            var currentUser = (Users)HttpContext.Session["user"];
+            if (currentUser != null)
+            {
+                var userFromDb = db.Users.Find(currentUser.Id);
+                if (!userFromDb.LikedStores.Contains(store))
+                {
+                    userFromDb.LikedStores.Add(store);
+                }
+                else
+                {
+                    userFromDb.LikedStores.Remove(store);
+                }
+                db.SaveChanges();
+                ViewBag.Liked = userFromDb.LikedStores;
+                return View("Index", db.Stores.ToList());
+            }
+
+            return RedirectToAction("Index", "Error", new { message = "you are not logged in" });
         }
 
         protected override void Dispose(bool disposing)

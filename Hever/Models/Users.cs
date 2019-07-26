@@ -12,5 +12,6 @@ namespace Hever.Models
         public string Password { get; set; }
         public bool IsAdmin { get; set; }
         public virtual ICollection<Restaurant> LikedRestaurants { get; set; }
+        public virtual ICollection<Store> LikedStores { get; set; }
     }
 }

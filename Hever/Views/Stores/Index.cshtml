@@ -89,6 +89,16 @@
             <td>
                 @Html.DisplayFor(modelItem => item.StoreType)
             </td>
+            <td>
+                @if (activeUser != null && ViewBag.Liked != null && ViewBag.Liked.Contains(item))
+                {
+                    @Html.ActionLink("Unlike", "Like", new { id = item.Id })
+                }
+                else
+                {
+                    @Html.ActionLink("Like", "Like", new { id = item.Id })
+                }
+            </td>
             @if (activeUser != null && activeUser.IsAdmin)
             {
                 <td>

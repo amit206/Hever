@@ -138,6 +138,25 @@ namespace Hever.Controllers
             return View(users);
         }
 
+        // GET: Users/Search
+        public ActionResult Search(string username = null, string isAdmin = "dont filter")
+        {
+            var returnDataQurey = db.Users.Select(u => u);
+
+            if (isAdmin != "dont filter")
+            {
+                bool admin = isAdmin.Equals("True");
+                returnDataQurey = returnDataQurey.Where(r => r.IsAdmin == admin);
+            }
+
+            if (!string.IsNullOrEmpty(username))
+            {
+                returnDataQurey = returnDataQurey.Where(u => u.UserName.Contains(username));
+            }
+
+            return View("Index", returnDataQurey.ToList());
+        }
+
         // GET: Users/Delete/5
         public ActionResult Delete(int? id)
         {

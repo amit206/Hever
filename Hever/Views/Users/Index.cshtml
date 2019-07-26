@@ -5,7 +5,34 @@
     ViewBag.Title = "Users";
 }
 
-<h2>Index</h2>
+<h2>Our Users</h2>
+
+<div class="container" style="display:flex;justify-content:flex-start">
+    @using (Html.BeginForm("Search", "Users", FormMethod.Get))
+    {
+        <form class="form-inline">
+            <div class="form-group col-md-2" style="width:fit-content">
+                <div>
+                    <input class="form-control" type="text" name="username" placeholder="Username" />
+                </div>
+            </div>
+            <div class="form-group col-md-2" style="width:fit-content">
+                <div>
+                    <input type="radio" name="isAdmin" value="True"> Admin<br>
+                    <input type="radio" name="isAdmin" value="False"> Not Admin<br>
+                    <input type="radio" name="isAdmin" value="dont filter"> Don't Care<br>
+                </div>
+            </div>
+            <div class="form-group col-md-3">
+                <button type="submit" class="btn btn-info">
+                    <span class="glyphicon glyphicon-search">
+                        Search
+                    </span>
+                </button>
+            </div>
+        </form>
+    }
+</div>
 
 <table class="table">
     <tr>

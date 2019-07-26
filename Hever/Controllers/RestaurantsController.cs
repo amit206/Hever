@@ -23,7 +23,7 @@ namespace Hever.Controllers
             if (currentUser != null)
             {
                 var userFromDb = db.Users.Find(currentUser.Id);
-                TempData["Liked"] = userFromDb.LikedRestaurants;
+                ViewBag.Liked = userFromDb.LikedRestaurants;
             }
             return View(db.Restaurants.ToList());
         }

@@ -28,7 +28,7 @@ namespace Hever.Controllers
             return View(db.Stores.ToList());
         }
 
-        // GET: Fabric/Search
+        // GET: Stores/Search
         public ActionResult Search(string storeType = null, string area = null, bool accessible = false)
         {
             ViewBag.storeTypeList = db.Stores.Select(s => s.StoreType).Distinct();

@@ -28,7 +28,7 @@ namespace Hever.Controllers
             return View(db.Restaurants.ToList());
         }
 
-        // GET: Fabric/Search
+        // GET: Restaurant/Search
         public ActionResult Search(string restaurantType = null, string area = null, bool kosher = false, bool accessible = false)
         {
             ViewBag.restaurantTypeList = db.Restaurants.Select(r => r.RestaurantType).Distinct();

@@ -1,23 +1,32 @@
 ﻿<link href="~/Content/home.css" rel="stylesheet" />
 
 @{
+    Hever.Models.Users activeUser = ((Hever.Models.Users)Session["user"]);
     ViewBag.Title = "Home";
 }
 
-<div class="row">
-    <div class="col-sm-6">
-        <a role="button" class="btn btn-success home-btn" href="/Restaurants">Restaurants</a>
+@if (activeUser != null)
+{
+    <div class="row">
+        <div class="col-sm-4">
+            <a role="button" class="btn btn-success home-btn" href="/Restaurants">Restaurants</a>
+        </div>
+        <div class="col-sm-4">
+            <a role="button" class="btn btn-warning home-btn" href="/Stores">Shopping</a>
+        </div>
+        <div class="col-sm-4">
+            <a role="button" class="btn btn-danger home-btn" href="/">Recomanded</a>
+        </div>
     </div>
-    <div class="col-sm-6">
-        <a role="button" class="btn btn-warning home-btn" href="/Stores">Shopping</a>
+}
+else
+{
+    <div class="row">
+        <div class="col-sm-6">
+            <a role="button" class="btn btn-success home-btn" href="/">About</a>
+        </div>
+        <div class="col-sm-6">
+            <a role="button" class="btn btn-info home-btn" href="/">Contact Us</a>
+        </div>
     </div>
-</div>
-
-<div class="row">
-    <div class="col-sm-6">
-        <a role="button" class="btn btn-danger home-btn" href="/">Recomanded</a>
-    </div>
-    <div class="col-sm-6">
-        <a role="button" class="btn btn-info home-btn" href="/">Near you</a>
-    </div>
-</div>
+}

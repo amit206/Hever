@@ -248,6 +248,14 @@
     <Compile Include="Migrations\201907191343154_einor.Designer.cs">
       <DependentUpon>201907191343154_einor.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201907251522062_Migration33.cs" />
+    <Compile Include="Migrations\201907251522062_Migration33.Designer.cs">
+      <DependentUpon>201907251522062_Migration33.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201907251557056_Migration34.cs" />
+    <Compile Include="Migrations\201907251557056_Migration34.Designer.cs">
+      <DependentUpon>201907251557056_Migration34.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\HeverDbContext.cs" />
     <Compile Include="Models\Restaurant.cs" />
@@ -304,6 +312,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201907191343154_einor.resx">
       <DependentUpon>201907191343154_einor.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201907251522062_Migration33.resx">
+      <DependentUpon>201907251522062_Migration33.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201907251557056_Migration34.resx">
+      <DependentUpon>201907251557056_Migration34.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

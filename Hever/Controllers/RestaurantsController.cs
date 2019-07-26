@@ -19,6 +19,12 @@ namespace Hever.Controllers
         {
             ViewBag.restaurantTypeList = db.Restaurants.Select(r => r.RestaurantType).Distinct();
             ViewBag.areaList = db.Restaurants.Select(r => r.Area).Distinct();
+            var currentUser = (Users)HttpContext.Session["user"];
+            if (currentUser != null)
+            {
+                var userFromDb = db.Users.Find(currentUser.Id);
+                TempData["Liked"] = userFromDb.LikedRestaurants;
+            }
             return View(db.Restaurants.ToList());
         }
 
@@ -147,6 +153,43 @@ namespace Hever.Controllers
             db.Restaurants.Remove(restaurant);
             db.SaveChanges();
             return RedirectToAction("Index");
+        }
+
+        // GET: Restaurants/Like/5
+        public ActionResult Like(int? id)
+        {
+
+            ViewBag.restaurantTypeList = db.Restaurants.Select(r => r.RestaurantType).Distinct();
+            ViewBag.areaList = db.Restaurants.Select(r => r.Area).Distinct();
+
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Restaurant restaurant = db.Restaurants.Find(id);
+            if (restaurant == null)
+            {
+                return HttpNotFound();
+            }
+
+            var currentUser = (Users)HttpContext.Session["user"];
+            if (currentUser != null)
+            {
+                var userFromDb = db.Users.Find(currentUser.Id);
+                if (!userFromDb.LikedRestaurants.Contains(restaurant))
+                {
+                    userFromDb.LikedRestaurants.Add(restaurant);
+                }
+                else
+                {
+                    userFromDb.LikedRestaurants.Remove(restaurant);
+                }
+                db.SaveChanges();
+                ViewBag.Liked = userFromDb.LikedRestaurants;
+                return View("Index", db.Restaurants.ToList());
+            }
+
+            return RedirectToAction("Index", "Error", new { message = "you are not logged in" });
         }
 
         protected override void Dispose(bool disposing)

@@ -34,7 +34,7 @@
                 {
                     @Html.ActionLink("Users", "", "Users", new { area = "" }, new { @class = "navbar-brand" })
 
-                    @Html.ActionLink("Statistics", "", "", new { area = "" }, new { @class = "navbar-brand" })
+                    @Html.ActionLink("Statistics", "", "Stats", new { area = "" }, new { @class = "navbar-brand" })
                 }
 
                 @Html.ActionLink("About", "", "", new { area = "" }, new { @class = "navbar-brand" })
@@ -50,11 +50,11 @@
                 }
                 else
                 {
-                    @Html.ActionLink("Logoff", "", "Users/Logout", new { area = "" }, new { @class = "navbar-brand" })
-
                     <span style="color: white !important; font-size: 16px; pointer-events: none;">
                         Welcome @(activeUser.UserName)
                     </span>
+
+                    @Html.ActionLink("Logoff", "", "Users/Logout", new { area = "" }, new { @class = "navbar-brand" })
                 }
             </div>
             <div class="navbar-collapse collapse">
@@ -67,7 +67,7 @@
         @RenderBody()
         <hr />
         <footer>
-            <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
+            <p>&copy; @DateTime.Now.Year - Friend For You!</p>
         </footer>
     </div>
 

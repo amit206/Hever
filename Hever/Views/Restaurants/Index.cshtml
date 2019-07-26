@@ -80,9 +80,6 @@
         <th>
             @Html.DisplayNameFor(model => model.RestaurantType)
         </th>
-        <th>
-            @Html.DisplayNameFor(model => model.FacebookLink)
-        </th>
         <th></th>
     </tr>
 
@@ -104,8 +101,17 @@
             <td>
                 @Html.DisplayFor(modelItem => item.RestaurantType)
             </td>
+
+
             <td>
-                @Html.DisplayFor(modelItem => item.FacebookLink)
+                @if (activeUser != null && ViewBag.Liked != null && ViewBag.Liked.Contains(item))
+                {
+                        @Html.ActionLink("Unlike", "Like", new { id = item.Id })
+                }
+                else
+                {
+                    @Html.ActionLink("Like", "Like", new { id = item.Id })
+                }
             </td>
             @if (activeUser != null && activeUser.IsAdmin)
             {
@@ -113,9 +119,9 @@
                     @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
                     @Html.ActionLink("Details", "Details", new { id = item.Id }) |
                     @Html.ActionLink("Delete", "Delete", new { id = item.Id })
-
                 </td>
             }
+
         </tr>
     }
 

@@ -21,6 +21,14 @@ namespace Hever.Migrations
             context.Restaurants.RemoveRange(dataRestaurants);
             var dataStores = (from n in context.Stores select n);
             context.Stores.RemoveRange(dataStores);
+            var dataUsers = (from n in context.Users select n);
+            context.Users.RemoveRange(dataUsers);
+
+            context.Users.Add(new Users() {Id=1, UserName = "Einor", Password="Einor", IsAdmin = true });
+            context.Users.Add(new Users() {Id=2, UserName = "Amit", Password= "Amit", IsAdmin = true });
+            context.Users.Add(new Users() {Id=3, UserName = "1", Password="1", IsAdmin = true });
+            context.Users.Add(new Users() {Id=4, UserName = "2", Password="2", IsAdmin = false });
+            context.Users.Add(new Users() {Id=5, UserName = "3", Password="3", IsAdmin = false });
 
             context.Stores.Add(new Store() { Id = 1, Name = "YOLO", FullAddress = "Yizchak Rabin 53 Ramat Gan", IsAccessible = true, StoreType = "Books", Area = "Center" });
             context.Stores.Add(new Store() { Id = 2, Name = "YOLO", FullAddress = "Atir Yeda 4 Kfar Saba", IsAccessible = false, StoreType = "Books", Area = "Sharon" });

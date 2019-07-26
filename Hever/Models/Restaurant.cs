@@ -13,7 +13,6 @@ namespace Hever.Models
         public bool IsAccessible { get; set; }
         public bool IsKosher { get; set; }
         public string RestaurantType { get; set; }
-        public string FacebookLink { get; set; }
         public string Area { get; set; }
     }
 }

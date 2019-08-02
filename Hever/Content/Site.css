@@ -32,8 +32,12 @@ textarea {
     text-align: center;
 }
 
-
 #map {
     display: flex;
     justify-content: center;
+}
+
+video {
+    padding-left: 30%;
+    width: 750px;
 }

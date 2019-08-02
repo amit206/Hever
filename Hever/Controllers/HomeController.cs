@@ -13,5 +13,13 @@ namespace Hever.Controllers
         {
             return View();
         }
+
+        // GET: Home/About
+        public ActionResult About()
+        {
+            ViewBag.Message = "Your contact page.";
+
+            return View();
+        }
     }
 }

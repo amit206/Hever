@@ -95,7 +95,9 @@
     {
 <tr>
     <td>
-        @Html.DisplayFor(modelItem => item.Name)
+        <a href="/Restaurants/Details/@item.Id">
+            @Html.DisplayFor(modelItem => item.Name)
+        </a>
     </td>
     <td>
         @Html.DisplayFor(modelItem => item.FullAddress)

@@ -1,11 +1,9 @@
 ﻿
 var map;
 function initMap() {
-    
+
     var mapOptions = {
         mapTypeId: 'roadmap',
-        zoom: 8,
-        center: { lat: 31.771959, lng: 35.217018 }
     };
 
     // Display a map on the page
@@ -16,7 +14,9 @@ function initMap() {
     var marker, i;
     var geocoder = new google.maps.Geocoder();
 
-    var address = 'Tel Aviv';
+    var address = $('.address')[0].innerText;
+    var title = $('.title')[0].innerText;
+    console.log(address);
     geocoder.geocode({ 'address': address }, function (results, status) {
         if (status === 'OK') {
             var position = new google.maps.LatLng(results[0].geometry.location.lat(), results[0].geometry.location.lng());
@@ -33,8 +33,6 @@ function initMap() {
 
             // Automatically center the map fitting all markers on the screen
             map.fitBounds(bounds);
-        } else {
-            alert('Geocode was not successful for the following reason: ' + status);
         }
     });
 }

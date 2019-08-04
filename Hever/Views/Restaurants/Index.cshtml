@@ -77,6 +77,9 @@
             @Html.DisplayNameFor(model => model.FullAddress)
         </th>
         <th>
+            @Html.DisplayNameFor(model => model.Area)
+        </th>
+        <th>
             @Html.DisplayNameFor(model => model.IsAccessible)
         </th>
         <th>
@@ -90,43 +93,46 @@
 
     @foreach (var item in Model)
     {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Name)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.FullAddress)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.IsAccessible)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.IsKosher)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.RestaurantType)
-            </td>
+<tr>
+    <td>
+        @Html.DisplayFor(modelItem => item.Name)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.FullAddress)
+    </td>
+    <th>
+        @Html.DisplayFor(modelItem => item.Area)
+    </th>
+    <td>
+        @Html.DisplayFor(modelItem => item.IsAccessible)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.IsKosher)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.RestaurantType)
+    </td>
 
 
-            <td>
-                @if (activeUser != null && ViewBag.Liked != null && ViewBag.Liked.Contains(item))
-                {
-                    @Html.ActionLink("Unlike", "Like", new { id = item.Id })
-                }
-                else
-                {
-                    @Html.ActionLink("Like", "Like", new { id = item.Id })
-                }
-            </td>
-            @if (activeUser != null && activeUser.IsAdmin)
-            {
-                <td>
-                    @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
-                    @Html.ActionLink("Delete", "Delete", new { id = item.Id })
-                </td>
-            }
+    <td>
+        @if (activeUser != null && ViewBag.Liked != null && ViewBag.Liked.Contains(item))
+        {
+            @Html.ActionLink("Unlike", "Like", new { id = item.Id })
+        }
+        else
+        {
+            @Html.ActionLink("Like", "Like", new { id = item.Id })
+        }
+    </td>
+    @if (activeUser != null && activeUser.IsAdmin)
+    {
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
+            @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+        </td>
+    }
 
-        </tr>
+</tr>
     }
 
 </table>

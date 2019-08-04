@@ -208,7 +208,7 @@ namespace Hever.Controllers
             if (userInDataBase != null)
             {
                 System.Web.HttpContext.Current.Session["user"] = userInDataBase;
-                return RedirectToAction("Index", "Home");
+                return RedirectToAction("Index", "Home", new { id = userInDataBase.Id });
             }
 
             ViewBag.ErrMsg = "User name or password are incorrect.";

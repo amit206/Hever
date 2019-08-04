@@ -5,21 +5,7 @@
     ViewBag.Title = "Home";
 }
 
-@if (activeUser != null)
-{
-    <div class="row">
-        <div class="col-sm-4">
-            <a role="button" class="btn btn-success home-btn" href="/Restaurants">Restaurants</a>
-        </div>
-        <div class="col-sm-4">
-            <a role="button" class="btn btn-warning home-btn" href="/Stores">Shopping</a>
-        </div>
-        <div class="col-sm-4">
-            <a role="button" class="btn btn-danger home-btn" href="/">Recomanded</a>
-        </div>
-    </div>
-}
-else
+@if (activeUser == null)
 {
     <div class="row">
         <div class="col-sm-6">
@@ -30,3 +16,222 @@ else
         </div>
     </div>
 }
+else
+{
+        <div class="row">
+            <div class="col-sm-6">
+                <a role="button" class="btn btn-success home-btn" href="/Restaurants">Restaurants</a>
+            </div>
+            <div class="col-sm-6">
+                <a role="button" class="btn btn-info home-btn" href="/Stores">Shopping</a>
+            </div>
+        </div>
+        <div class="container">
+            <div class="row">
+                <div class='col-md-offset-2 col-md-8 text-center'>
+                    <h2>Restaurants Recommendations for you!</h2>
+                </div>
+            </div>
+            @if (Enumerable.Count(ViewBag.recommendedRestaurants) == 0)
+            {
+                <div class='col-md-offset-2 col-md-8 text-center'>
+                    <h3>No Recommendations for you now</h3>
+                    <h3>If you want Recommendations you need to Like some restaurants</h3>
+                </div>
+            }
+            else
+            {
+                <div class='row'>
+                    <div class='col-md-offset-2 col-md-8'>
+                        <div class="carousel slide quote-carousel" data-ride="carousel" id="quote-carousel">
+                            <!--Carousel Slides / Quotes -->
+                            <div class="carousel-inner">
+                                @for (var i = 0; ViewBag.recommendedRestaurants != null &&
+                                 i < Enumerable.Count(ViewBag.recommendedRestaurants); i++)
+                                {
+                                    var res = ViewBag.recommendedRestaurants[i];
+                                    if (i == 0)
+                                    {
+                                        <div class="item active">
+                                            <blockquote>
+                                                <div class="row">
+                                                    <div class="col-sm-3 text-center">
+                                                        <img class="img-circle" src="http://www.reactiongifs.com/r/overbite.gif" style="width: 100px;height:100px;">
+                                                    </div>
+                                                    <div class="col-sm-5">
+                                                        <p>@res.RestaurantType - @res.Name</p>
+                                                        <small>@res.FullAddress</small>
+                                                        @if (res.IsAccessible)
+                                                        {
+                                                            <small>Accessible</small>
+                                                        }
+                                                        else
+                                                        {
+                                                            <small>Not accessible</small>
+                                                        }
+                                                        @if (res.IsKosher)
+                                                        {
+                                                            <small>Kosher</small>
+                                                        }
+                                                        else
+                                                        {
+                                                            <small>Not kosher</small>
+                                                        }
+                                                    </div>
+                                                </div>
+                                            </blockquote>
+                                        </div>
+                                    }
+                                    else
+                                    {
+                                        <div class="item">
+                                            <blockquote>
+                                                <div class="row">
+                                                    <div class="col-sm-3 text-center">
+                                                        <img class="img-circle" src="https://s3.amazonaws.com/uifaces/faces/twitter/mijustin/128.jpg" style="width: 100px;height:100px;">
+                                                    </div>
+                                                    <div class="col-sm-5">
+                                                        <p>@res.RestaurantType - @res.Name</p>
+                                                        <small>@res.FullAddress</small>
+                                                        @if (res.IsAccessible)
+                                                        {
+                                                            <small>Accessible</small>
+                                                        }
+                                                        else
+                                                        {
+                                                            <small>Not accessible</small>
+                                                        }
+                                                        @if (res.IsKosher)
+                                                        {
+                                                            <small>Kosher</small>
+                                                        }
+                                                        else
+                                                        {
+                                                            <small>Not kosher</small>
+                                                        }
+                                                    </div>
+                                                </div>
+                                            </blockquote>
+                                        </div>
+                                    }
+                                }
+                            </div>
+
+                            <!-- Carousel Buttons Next/Prev -->
+                            <a data-slide="prev" href="#quote-carousel" class="left carousel-control" style="background-image: linear-gradient(to left,rgba(0,0,0,0) 0,rgba(0,0,0,0) 100%); color:#222; font-size: 2.3em;"><i class="fa fa-chevron-left"></i></a>
+                            <a data-slide="next" href="#quote-carousel" class="right carousel-control" style="background-image: linear-gradient(to right,rgba(0,0,0,0) 0,rgba(0,0,0,0) 100%);color:#222; font-size: 2.3em"><i class="fa fa-chevron-right"></i></a>
+                        </div>
+                    </div>
+                </div>
+            }
+            </div>
+    <br />
+    <div class="container">
+        <div class="row">
+            <div class='col-md-offset-2 col-md-8 text-center'>
+                <h2>Stores Recommendations for you!</h2>
+            </div>
+        </div>
+        @if (Enumerable.Count(ViewBag.recommendedStores) == 0)
+        {
+            <div class='col-md-offset-2 col-md-8 text-center'>
+                <h3>No Recommendations for you now</h3>
+                <h3>If you want Recommendations you need to Like some stores</h3>
+                </div>
+                }
+                else
+                {
+                <div class='row'>
+                    <div class='col-md-offset-2 col-md-8'>
+                        <div class="carousel slide quote-carousel" data-ride="carousel" id="quote-carousela">
+                            <!--Carousel Slides / Quotes -->
+                            <div class="carousel-inner">
+                                @for (var i = 0; ViewBag.recommendedStores != null &&
+                                     i < Enumerable.Count(ViewBag.recommendedStores); i++)
+                                {
+                                    var store = ViewBag.recommendedStores[i];
+                                    if (i == 0)
+                                    {
+                                        <div class="item active">
+                                            <blockquote>
+                                                <div class="row">
+                                                    <div class="col-sm-3 text-center">
+                                                        <img class="img-circle" src="http://www.reactiongifs.com/r/overbite.gif" style="width: 100px;height:100px;">
+                                                    </div>
+                                                    <div class="col-sm-5">
+                                                        <p>@store.StoreType - @store.Name</p>
+                                                        <small>@store.FullAddress</small>
+                                                        @if (store.IsAccessible)
+                                                        {
+                                                            <small>Accessible</small>
+                                                        }
+                                                        else
+                                                        {
+                                                            <small>Not accessible</small>
+                                                        }
+                                                    </div>
+                                                </div>
+                                            </blockquote>
+                                        </div>
+                                    }
+                                    else
+                                    {
+                                        <div class="item">
+                                            <blockquote>
+                                                <div class="row">
+                                                    <div class="col-sm-3 text-center">
+                                                        <img class="img-circle" src="https://s3.amazonaws.com/uifaces/faces/twitter/mijustin/128.jpg" style="width: 100px;height:100px;">
+                                                    </div>
+                                                    <div class="col-sm-5">
+                                                        <p>@store.StoreType - @store.Name</p>
+                                                        <small>@store.FullAddress</small>
+                                                        @if (store.IsAccessible)
+                                                        {
+                                                            <small>Accessible</small>
+                                                        }
+                                                        else
+                                                        {
+                                                            <small>Not accessible</small>
+                                                        }
+                                                    </div>
+                                                </div>
+                                            </blockquote>
+                                        </div>
+                                    }
+                                }
+                            </div>
+
+                            <!-- Carousel Buttons Next/Prev -->
+                            <a data-slide="prev" href="#quote-carousela" class="left carousel-control" style="background-image: linear-gradient(to left,rgba(0,0,0,0) 0,rgba(0,0,0,0) 100%); color:#222; font-size: 2.3em;"><i class="fa fa-chevron-left"></i></a>
+                            <a data-slide="next" href="#quote-carousela" class="right carousel-control" style="background-image: linear-gradient(to right,rgba(0,0,0,0) 0,rgba(0,0,0,0) 100%);color:#222; font-size: 2.3em"><i class="fa fa-chevron-right"></i></a>
+                        </div>
+                    </div>
+                </div>
+                }
+            </div>
+        }
+
+        <script>
+            $(document).ready(function () {
+                //Set the carousel options
+                $('#quote-carousel2').carousel({
+                    pause: true,
+                    interval: 4000,
+                });
+            });
+            $(document).ready(function () {
+                //Set the carousel options
+                $('#quote-carousela').carousel({
+                    pause: true,
+                    interval: 4000,
+                });
+            });
+            $(document).ready(function () {
+                //Set the carousel options
+                $('#quote-carousel').carousel({
+                    pause: true,
+                    interval: 4000,
+                });
+            });
+
+        </script>

@@ -104,8 +104,8 @@
           });
     }
 
-    var GroupByCityJson = JSON.parse('@Html.Raw(ViewBag.GroupByCityJson)');
-    drawPie(GroupByCityJson);
+    var GroupByAreaJson = JSON.parse('@Html.Raw(ViewBag.GroupByAreaJson)');
+    drawPie(GroupByAreaJson);
 
     function drawBar(jsonData) {
         var margin = { top: 20, right: 20, bottom: 30, left: 40 },

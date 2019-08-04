@@ -17,20 +17,28 @@ namespace Hever.Controllers
         // GET: Restaurants
         public ActionResult Index()
         {
+            var currentUser = (Users)HttpContext.Session["user"];
+            if (currentUser == null)
+            {
+                return RedirectToAction("Index", "Error");
+            }
+
             ViewBag.restaurantTypeList = db.Restaurants.Select(r => r.RestaurantType).Distinct();
             ViewBag.areaList = db.Restaurants.Select(r => r.Area).Distinct();
-            var currentUser = (Users)HttpContext.Session["user"];
-            if (currentUser != null)
-            {
-                var userFromDb = db.Users.Find(currentUser.Id);
-                ViewBag.Liked = userFromDb.LikedRestaurants;
-            }
+            var userFromDb = db.Users.Find(currentUser.Id);
+            ViewBag.Liked = userFromDb.LikedRestaurants;
             return View(db.Restaurants.ToList());
         }
 
         // GET: Restaurant/Search
         public ActionResult Search(string restaurantType = null, string area = null, bool kosher = false, bool accessible = false)
         {
+            var currentUser = (Users)HttpContext.Session["user"];
+            if (currentUser == null)
+            {
+                return RedirectToAction("Index", "Error");
+            }
+
             ViewBag.restaurantTypeList = db.Restaurants.Select(r => r.RestaurantType).Distinct();
             ViewBag.areaList = db.Restaurants.Select(r => r.Area).Distinct();
 
@@ -63,6 +71,12 @@ namespace Hever.Controllers
         // GET: Restaurants/Details/5
         public ActionResult Details(int? id)
         {
+            var currentUser = (Users)HttpContext.Session["user"];
+            if (currentUser == null)
+            {
+                return RedirectToAction("Index", "Error");
+            }
+
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -78,6 +92,12 @@ namespace Hever.Controllers
         // GET: Restaurants/Create
         public ActionResult Create()
         {
+            var currentUser = (Users)HttpContext.Session["user"];
+            if (currentUser == null || !currentUser.IsAdmin)
+            {
+                return RedirectToAction("Index", "Error");
+            }
+
             return View();
         }
 
@@ -88,6 +108,12 @@ namespace Hever.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "Id,Name,StreetAndNum,IsAccessible,IsKosher,RestaurantType,FacebookLink,CityId")] Restaurant restaurant)
         {
+            var currentUser = (Users)HttpContext.Session["user"];
+            if (currentUser == null || !currentUser.IsAdmin)
+            {
+                return RedirectToAction("Index", "Error");
+            }
+
             if (ModelState.IsValid)
             {
                 db.Restaurants.Add(restaurant);
@@ -101,6 +127,12 @@ namespace Hever.Controllers
         // GET: Restaurants/Edit/5
         public ActionResult Edit(int? id)
         {
+            var currentUser = (Users)HttpContext.Session["user"];
+            if (currentUser == null || !currentUser.IsAdmin)
+            {
+                return RedirectToAction("Index", "Error");
+            }
+
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -120,6 +152,12 @@ namespace Hever.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "Id,Name,StreetAndNum,IsAccessible,IsKosher,RestaurantType,FacebookLink,CityId")] Restaurant restaurant)
         {
+            var currentUser = (Users)HttpContext.Session["user"];
+            if (currentUser == null || !currentUser.IsAdmin)
+            {
+                return RedirectToAction("Index", "Error");
+            }
+
             if (ModelState.IsValid)
             {
                 db.Entry(restaurant).State = EntityState.Modified;
@@ -132,6 +170,12 @@ namespace Hever.Controllers
         // GET: Restaurants/Delete/5
         public ActionResult Delete(int? id)
         {
+            var currentUser = (Users)HttpContext.Session["user"];
+            if (currentUser == null || !currentUser.IsAdmin)
+            {
+                return RedirectToAction("Index", "Error");
+            }
+
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -149,6 +193,12 @@ namespace Hever.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
+            var currentUser = (Users)HttpContext.Session["user"];
+            if (currentUser == null || !currentUser.IsAdmin)
+            {
+                return RedirectToAction("Index", "Error");
+            }
+
             Restaurant restaurant = db.Restaurants.Find(id);
             db.Restaurants.Remove(restaurant);
             db.SaveChanges();

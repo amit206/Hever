@@ -17,22 +17,31 @@ namespace Hever.Controllers
         // GET: Stores
         public ActionResult Index()
         {
+            var currentUser = (Users)HttpContext.Session["user"];
+            if (currentUser == null)
+            {
+                return RedirectToAction("Index", "Error");
+            }
+
             ViewBag.storeTypeList = db.Stores.Select(s => s.StoreType).Distinct();
             ViewBag.areaList = db.Stores.Select(s => s.Area).Distinct();
-            var currentUser = (Users)HttpContext.Session["user"];
-            if (currentUser != null)
-            {
-                var userFromDb = db.Users.Find(currentUser.Id);
-                ViewBag.Liked = userFromDb.LikedStores;
-            }
+            var userFromDb = db.Users.Find(currentUser.Id);
+            ViewBag.Liked = userFromDb.LikedStores;
+
             return View(db.Stores.ToList());
         }
 
         // GET: Stores/Search
         public ActionResult Search(string storeType = null, string area = null, bool accessible = false)
         {
+            var currentUser = (Users)HttpContext.Session["user"];
+            if (currentUser == null)
+            {
+                return RedirectToAction("Index", "Error");
+            }
+
             ViewBag.storeTypeList = db.Stores.Select(s => s.StoreType).Distinct();
-            ViewBag.areaList = db.Stores.Select(s => s.Area).Distinct(); 
+            ViewBag.areaList = db.Stores.Select(s => s.Area).Distinct();
 
             var returnDataQurey = db.Stores.Select(s => s);
 
@@ -58,6 +67,12 @@ namespace Hever.Controllers
         // GET: Stores/Details/5
         public ActionResult Details(int? id)
         {
+            var currentUser = (Users)HttpContext.Session["user"];
+            if (currentUser == null)
+            {
+                return RedirectToAction("Index", "Error");
+            }
+
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -73,6 +88,12 @@ namespace Hever.Controllers
         // GET: Stores/Create
         public ActionResult Create()
         {
+            var currentUser = (Users)HttpContext.Session["user"];
+            if (currentUser == null || !currentUser.IsAdmin)
+            {
+                return RedirectToAction("Index", "Error");
+            } 
+
             return View();
         }
 
@@ -83,6 +104,12 @@ namespace Hever.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "Id,Name,StreetAndNum,IsAccessible,StoreType,CityId")] Store store)
         {
+            var currentUser = (Users)HttpContext.Session["user"];
+            if (currentUser == null || !currentUser.IsAdmin)
+            {
+                return RedirectToAction("Index", "Error");
+            }
+
             if (ModelState.IsValid)
             {
                 db.Stores.Add(store);
@@ -96,6 +123,12 @@ namespace Hever.Controllers
         // GET: Stores/Edit/5
         public ActionResult Edit(int? id)
         {
+            var currentUser = (Users)HttpContext.Session["user"];
+            if (currentUser == null || !currentUser.IsAdmin)
+            {
+                return RedirectToAction("Index", "Error");
+            }
+
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -115,6 +148,12 @@ namespace Hever.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "Id,Name,StreetAndNum,IsAccessible,StoreType,CityId")] Store store)
         {
+            var currentUser = (Users)HttpContext.Session["user"];
+            if (currentUser == null || !currentUser.IsAdmin)
+            {
+                return RedirectToAction("Index", "Error");
+            }
+
             if (ModelState.IsValid)
             {
                 db.Entry(store).State = EntityState.Modified;
@@ -127,6 +166,12 @@ namespace Hever.Controllers
         // GET: Stores/Delete/5
         public ActionResult Delete(int? id)
         {
+            var currentUser = (Users)HttpContext.Session["user"];
+            if (currentUser == null || !currentUser.IsAdmin)
+            {
+                return RedirectToAction("Index", "Error");
+            }
+
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -144,6 +189,12 @@ namespace Hever.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
+            var currentUser = (Users)HttpContext.Session["user"];
+            if (currentUser == null || !currentUser.IsAdmin)
+            {
+                return RedirectToAction("Index", "Error");
+            }
+
             Store store = db.Stores.Find(id);
             db.Stores.Remove(store);
             db.SaveChanges();

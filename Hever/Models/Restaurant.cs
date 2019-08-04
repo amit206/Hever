@@ -14,5 +14,6 @@ namespace Hever.Models
         public bool IsKosher { get; set; }
         public string RestaurantType { get; set; }
         public string Area { get; set; }
+        public virtual ICollection<Users> LikedUsers { get; set; }
     }
 }

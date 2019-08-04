@@ -13,5 +13,6 @@ namespace Hever.Models
         public bool IsAccessible { get; set; }
         public string StoreType { get; set; }
         public string Area { get; set; }
+        public virtual ICollection<Users> LikedUsers { get; set; }
     }
 }

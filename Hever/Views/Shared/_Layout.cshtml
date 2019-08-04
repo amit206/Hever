@@ -11,55 +11,78 @@
     <link href="~/Content/Site.css" rel="stylesheet" type="text/css" />
     <link href="~/Content/bootstrap.min.css" rel="stylesheet" type="text/css" />
     <script src="~/Scripts/modernizr-2.6.2.js"></script>
+
+    <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
+    <link href="~/Content/bootstrap-theme.css" rel="stylesheet" />
+    <link href="~/Content/bootstrap-theme.min.css" rel="stylesheet" />
+    <link href="~/Content/bootstrap.css" rel="stylesheet" />
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/Content/login.css" rel="stylesheet" />
+    <link href="~/Content/Site.css" rel="stylesheet" />
+    <script src="~/Scripts/bootstrap.js"></script>
+    <script src="~/Scripts/bootstrap.min.js"></script>
+    <script src="~/Scripts/jquery-1.10.2.js"></script>
+    <script src="~/Scripts/jquery-1.10.2.min.js"></script>
+    <script src="~/Scripts/jquery.validate.js"></script>
+    <script src="~/Scripts/jquery.validate-vsdoc.js"></script>
+    <script src="~/Scripts/jquery.validate.min.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
 </head>
-<body>
-    <div class="navbar navbar-inverse navbar-fixed-top">
-        <div class="container">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                @Html.ActionLink("Home", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+    <body>
+        <div class="navbar navbar-inverse navbar-fixed-top">
+            <div class="container">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    
+                    @if (activeUser != null)
+                    {
+                        @Html.ActionLink("Home", "Index", "Home", new { id = activeUser.Id, area = "" }, new { @class = "navbar-brand" })
 
-                @if (activeUser != null)
-                {
-                    @Html.ActionLink("Restaurants", "", "Restaurants", new { area = "" }, new { @class = "navbar-brand" })
+                        @Html.ActionLink("Restaurants", "", "Restaurants", new { area = "" }, new { @class = "navbar-brand" })
 
-                    @Html.ActionLink("Stores", "", "Stores", new { area = "" }, new { @class = "navbar-brand" })
-                }
+                        @Html.ActionLink("Stores", "", "Stores", new { area = "" }, new { @class = "navbar-brand" })
 
-                @if (activeUser != null && activeUser.IsAdmin)
-                {
-                    @Html.ActionLink("Users", "", "Users", new { area = "" }, new { @class = "navbar-brand" })
+                    }
+                    else
+                    {
+                        @Html.ActionLink("Home", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+                    }
 
-                    @Html.ActionLink("Statistics", "", "Stats", new { area = "" }, new { @class = "navbar-brand" })
-                }
+                    @if (activeUser != null && activeUser.IsAdmin)
+                    {
+                        @Html.ActionLink("Users", "", "Users", new { area = "" }, new { @class = "navbar-brand" })
+
+                        @Html.ActionLink("Statistics", "", "Stats", new { area = "" }, new { @class = "navbar-brand" })
+                    }
 
                 @Html.ActionLink("About", "About", "Home", new { area = "" }, new { @class = "navbar-brand" })
 
 
-                @if (activeUser == null)
-                {
-                    @Html.ActionLink("Register", "", "Users/Create", new { area = "" }, new { @class = "navbar-brand" })
+                    @if (activeUser == null)
+                    {
+                        @Html.ActionLink("Register", "", "Users/Create", new { area = "" }, new { @class = "navbar-brand" })
 
-                    @Html.ActionLink("Login", "", "Users/Login", new { area = "" }, new { @class = "navbar-brand" })
-                }
-                else
-                {
-                    <span style="color: white !important; font-size: 16px; pointer-events: none;">
-                        Welcome @(activeUser.UserName)
-                    </span>
+                        @Html.ActionLink("Login", "", "Users/Login", new { area = "" }, new { @class = "navbar-brand" })
+                    }
+                    else
+                    {
+                        <span style="color: white !important; font-size: 16px; pointer-events: none;">
+                            Welcome @(activeUser.UserName)
+                        </span>
 
-                    @Html.ActionLink("Logoff", "", "Users/Logout", new { area = "" }, new { @class = "navbar-brand" })
-                }
-            </div>
-            <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav"></ul>
+                        @Html.ActionLink("Logoff", "", "Users/Logout", new { area = "" }, new { @class = "navbar-brand" })
+                    }
+                </div>
+                <div class="navbar-collapse collapse">
+                    <ul class="nav navbar-nav"></ul>
+                </div>
             </div>
         </div>
-    </div>
 
     <div class="container body-content">
         <div>

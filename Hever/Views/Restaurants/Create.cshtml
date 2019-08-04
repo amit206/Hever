@@ -54,7 +54,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.RestaurantType, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EnumDropDownListFor(model => model.RestaurantType, htmlAttributes: new { @class = "form-control" })
+                @Html.EditorFor(model => model.RestaurantType, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.RestaurantType, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -62,7 +62,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.Area, "CityId", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EnumDropDownListFor(model => model.Area, htmlAttributes: new { @class = "form-control" })
+                @Html.EditorFor(model => model.Area, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.Area, "", new { @class = "text-danger" })
             </div>
         </div>

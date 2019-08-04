@@ -5,12 +5,17 @@
     ViewBag.Title = "Restaurant";
 }
 
-    <h2>Our Restaurant</h2>
+<hr>
+<h2 class="intro-text text-center">
+    Our
+    <strong>Restaurants</strong>
+</h2>
+<hr>
 
 @if (activeUser != null && activeUser.IsAdmin)
 {
     <p>
-        @Html.ActionLink("Create New", "Create")
+        @Html.ActionLink("Create New Restaurant", "Create")
     </p>
 }
 
@@ -106,7 +111,7 @@
             <td>
                 @if (activeUser != null && ViewBag.Liked != null && ViewBag.Liked.Contains(item))
                 {
-                        @Html.ActionLink("Unlike", "Like", new { id = item.Id })
+                    @Html.ActionLink("Unlike", "Like", new { id = item.Id })
                 }
                 else
                 {
@@ -117,7 +122,6 @@
             {
                 <td>
                     @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
-                    @Html.ActionLink("Details", "Details", new { id = item.Id }) |
                     @Html.ActionLink("Delete", "Delete", new { id = item.Id })
                 </td>
             }

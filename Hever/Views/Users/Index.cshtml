@@ -5,7 +5,12 @@
     ViewBag.Title = "Users";
 }
 
-<h2>Our Users</h2>
+<hr>
+<h2 class="intro-text text-center">
+    Our
+    <strong>Users</strong>
+</h2>
+<hr>
 
 <div class="container" style="display:flex;justify-content:flex-start">
     @using (Html.BeginForm("Search", "Users", FormMethod.Get))

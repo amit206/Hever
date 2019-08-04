@@ -36,17 +36,6 @@ namespace Hever.Controllers
             ViewBag.TypeOfLikedRestaurantsJSON = TypeOfLikedRestaurantsJSON;
 
             return View();
-
-           // IEnumerable<int> likedStore = db.Users.Where(u => u.Id == id).Select(p => p.LikedStores.Select(res => res.Id)).SingleOrDefault().ToList();
-
-            // Get all users that likes at least one store in common
-            //IEnumerable<int> usersStore = db.Users.Where(u => u.LikedStores.Select(str => str.Id).Any(sto => likedStore.Contains(sto))
-           //                          && u.Id != id).Select(uid => uid.Id).ToList();
-
-            // Get all the stores that they like but current user didn't
-           // var recommStores = db.Stores.Where(str => str.LikedUsers.Any(l => usersStore.Contains(l.Id))
-           //                 && !str.LikedUsers.Select(stid => stid.Id).Contains((int)id)).Take(numOfRecords).ToList();
-
         }
     }
 }

@@ -1,59 +1,80 @@
 ﻿@{
     ViewBag.Title = "About us";
 }
-<div class="container">
+    <head>
+        <link href="~/Content/Site.css" rel="stylesheet" type="text/css" />
+    </head>
+    <div class="container">
+        <link href="~/Content/Site.css" rel="stylesheet" />
 
-    <div class="row">
-        <div class="box" style="flex-direction:column">
-            <div class="col-lg-12">
-                <hr>
-                <h2 class="intro-text text-center">
-                    About
-                    <strong>US!</strong>
-                </h2>
-                <hr>
+        <div class="row">
+            <div class="box" style="flex-direction:column">
+                <div class="col-lg-12">
+                    <hr>
+                    <h2 class="intro-text text-center">
+                        About
+                        <strong>US!</strong>
+                    </h2>
+                    <hr>
 
                     <video frameborder="0" controls autoplay loop a>
                         <source src="~/Content/videos/song.mp4" type="video/mp4" />
                     </video>
                 </div>
-        </div>
-    </div>
-
-    <div class="row">
-        <div class="box" style="flex-direction:column">
-            <div class="col-lg-12">
-                <hr>
-                <h2 class="intro-text text-center">
-                    Contact
-                    <strong>US!</strong>
-                </h2>
-                <hr>
-                <p style="text-align:center">We are always open to hear from our custumers <span class="glyphicon glyphicon-heart"></span></p>
-
             </div>
-            <div class="col-md-8" style="margin-left: 17%">
-                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d846.1685154949976!2d34.77224002921574!3d31.96973799882648!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x1502b3f5eb44e1c1%3A0xfbe9b8c6bce59319!2z15TXnteh15zXldecINeU15DXp9eT157XmSDXlNee15vXnNec15Qg15zXnteZ16DXlNec!5e0!3m2!1sen!2sil!4v1510400958004" width="100%" height="400" frameborder="0" style="border:0" allowfullscreen></iframe>
-                <div id="map"></div>
+        </div>
 
-                <div class="col-md-4 contact-details">
-                    <p>
-                        Phone:
-                        <strong>052-1234567</strong>
-                    </p>
-                    <p>
-                        Email:
-                        <a href="mailto:FriendForYou@gmail.com">FriendForYou@gmail.com</a>
-                    </p>
-                    <p>
-                        Address:
-                        <strong>
-                            Elie Wiesel St 2, Rishon LeTsiyon, Israel
-                        </strong>
-                    </p>
+        <div class="row">
+            <div class="box" style="flex-direction:column">
+                <div class="col-lg-12">
+                    <hr>
+                    <h2 class="intro-text text-center">
+                        Contact
+                        <strong>US!</strong>
+                    </h2>
+                    <hr>
+                    <p style="text-align:center">We are always open to hear from our custumers <span class="glyphicon glyphicon-heart"></span></p>
+
+                </div>
+                <div class="col-md-8" style="margin-left: 17%">
+                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d846.1685154949976!2d34.77224002921574!3d31.96973799882648!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x1502b3f5eb44e1c1%3A0xfbe9b8c6bce59319!2z15TXnteh15zXldecINeU15DXp9eT157XmSDXlNee15vXnNec15Qg15zXnteZ16DXlNec!5e0!3m2!1sen!2sil!4v1510400958004" width="100%" height="400" frameborder="0" style="border:0" allowfullscreen></iframe>
+                    <div id="map"></div>
+
+                    <div class="col-md-4 contact-details">
+                        <p>
+                            Phone:
+                            <strong>052-1234567</strong>
+                        </p>
+                        <p>
+                            Email:
+                            <a href="mailto:FriendForYou@gmail.com">FriendForYou@gmail.com</a>
+                        </p>
+                        <p>
+                            Address:
+                            <strong>
+                                Elie Wiesel St 2, Rishon LeTsiyon, Israel
+                            </strong>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="box">
+                <div class="col-lg-12 text-center">
+                    <hr>
+                    <h2 class="intro-text text-center">
+                        Tweets
+                        <strong>about #FriendForYou</strong>
+                    </h2>
+                    <hr>
+                    <a href="https://twitter.com/intent/tweet?screen_name=FriendForYou" class="twitter-mention-button" data-show-count="false">Tweet to FriendForYou</a>
+                    <br />
+                    <a class="twitter-timeline" data-width="400" data-height="500" href="https://twitter.com/FriendForYou12">Tweets by FriendForYou</a>
+                    <script>!function (d, s, id) { var js, fjs = d.getElementsByTagName(s)[0], p = /^http:/.test(d.location) ? 'http' : 'https'; if (!d.getElementById(id)) { js = d.createElement(s); js.id = id; js.src = p + "://platform.twitter.com/widgets.js"; fjs.parentNode.insertBefore(js, fjs); } }(document, "script", "twitter-wjs");</script>
+                    <script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
                 </div>
             </div>
         </div>
     </div>
-</div>
 

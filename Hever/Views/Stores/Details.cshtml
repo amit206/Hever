@@ -4,25 +4,20 @@
     ViewBag.Title = "Details";
 }
 
-<h2>Details</h2>
+<hr />
+<h2>
+    @Html.DisplayFor(model => model.Name) Details
+</h2>
+<hr />
 
 <div>
-    <h4>Store</h4>
-    <hr />
     <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Area)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Area)
-        </dd>
 
         <dt>
             @Html.DisplayNameFor(model => model.Name)
         </dt>
 
-        <dd>
+        <dd class="title">
             @Html.DisplayFor(model => model.Name)
         </dd>
 
@@ -30,8 +25,16 @@
             @Html.DisplayNameFor(model => model.FullAddress)
         </dt>
 
-        <dd>
+        <dd class="address">
             @Html.DisplayFor(model => model.FullAddress)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Area)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Area)
         </dd>
 
         <dt>
@@ -53,6 +56,16 @@
     </dl>
 </div>
 <p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
     @Html.ActionLink("Back to List", "Index")
 </p>
+
+<section id="map">
+    <div class="map-wrapper">
+        <div class="map-canvas" id="map-canvas" style="align-content:center; height: 400px; width: 1000px;"></div>
+    </div>
+</section>
+
+<script src="https://code.jquery.com/jquery-3.4.1.js"></script>
+<script src="~/Scripts/map.js"></script>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAz63hmvzJ_y-HJephXtcRLUpyRyC3tD4k&callback=initMap" async defer></script>
+

@@ -21,12 +21,23 @@ namespace Hever.Controllers
                 return RedirectToAction("Index", "Error");
             }
 
-            var StoresByCity = db.Stores.GroupBy(s => s.Area)
-                .Select(i => new { city = i.Key.ToString(), count = i.Count() }).ToList();
-            var GroupByCityJson = JsonConvert.SerializeObject(StoresByCity);
-            ViewBag.GroupByCityJson = GroupByCityJson;
+            
+            var StoresAndResByArea = 
+                db.Stores.GroupBy(s => s.Area)
+                .Select(i => new { city = i.Key.ToString(), count = i.Count() })
 
-            var TypeOfLikedRestaurants = db.Restaurants.GroupBy(r=> r.RestaurantType)
+                .Union(db.Restaurants.GroupBy(s => s.Area)
+                .Select(i => new { city = i.Key.ToString() , count = i.Count() }))
+
+                .GroupBy(s => s.city)
+                .Select(i => new { city = i.Key, count = i.Sum(s => s.count) })
+                .ToList();
+            var GroupByStoresAndResJson = JsonConvert.SerializeObject(StoresAndResByArea);
+            ViewBag.GroupByAreaJson = GroupByStoresAndResJson;
+
+            var TypeOfLikedRestaurants = db.Restaurants.Where(u => u.LikedUsers.Count() != 0)
+                .GroupBy(r=> r.RestaurantType)
+                
                 .Select(i => new { type = i.Key.ToString(), count = i.Count() }).ToList();
             var TypeOfLikedRestaurantsJSON = JsonConvert.SerializeObject(TypeOfLikedRestaurants);
             ViewBag.TypeOfLikedRestaurantsJSON = TypeOfLikedRestaurantsJSON;

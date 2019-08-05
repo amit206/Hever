@@ -17,12 +17,24 @@ namespace Hever.Controllers
         // GET: Users
         public ActionResult Index()
         {
+            var currentUser = (Users)HttpContext.Session["user"];
+            if (currentUser == null)
+            {
+                return RedirectToAction("Index", "Error");
+            }
+
             return View(db.Users.ToList());
         }
 
         // GET: Users/Details/5
         public ActionResult Details(int? id)
         {
+            var currentUser = (Users)HttpContext.Session["user"];
+            if (currentUser == null || !currentUser.IsAdmin)
+            {
+                return RedirectToAction("Index", "Error");
+            }
+
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -90,6 +102,12 @@ namespace Hever.Controllers
         // GET: Users/Edit/5
         public ActionResult Edit(int? id)
         {
+            var currentUser = (Users)HttpContext.Session["user"];
+            if (currentUser == null || !currentUser.IsAdmin)
+            {
+                return RedirectToAction("Index", "Error");
+            }
+
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -105,6 +123,12 @@ namespace Hever.Controllers
         // GET: Users/MakeAdmine/5
         public ActionResult MakeAdmin(bool isAdmin, int? id)
         {
+            var currentUser = (Users)HttpContext.Session["user"];
+            if (currentUser == null || !currentUser.IsAdmin)
+            {
+                return RedirectToAction("Index", "Error");
+            }
+
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -129,6 +153,12 @@ namespace Hever.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "Id,UserName,Password,IsAdmine,CardNumber,CardExpirationDate,Cvs")] Users users)
         {
+            var currentUser = (Users)HttpContext.Session["user"];
+            if (currentUser == null || !currentUser.IsAdmin)
+            {
+                return RedirectToAction("Index", "Error");
+            }
+
             if (ModelState.IsValid)
             {
                 db.Entry(users).State = EntityState.Modified;
@@ -141,6 +171,12 @@ namespace Hever.Controllers
         // GET: Users/Search
         public ActionResult Search(string username = null, string isAdmin = "dont filter")
         {
+            var currentUser = (Users)HttpContext.Session["user"];
+            if (currentUser == null || !currentUser.IsAdmin)
+            {
+                return RedirectToAction("Index", "Error");
+            }
+
             var returnDataQurey = db.Users.Select(u => u);
 
             if (isAdmin != "dont filter")
@@ -160,6 +196,12 @@ namespace Hever.Controllers
         // GET: Users/Delete/5
         public ActionResult Delete(int? id)
         {
+            var currentUser = (Users)HttpContext.Session["user"];
+            if (currentUser == null || !currentUser.IsAdmin)
+            {
+                return RedirectToAction("Index", "Error");
+            }
+
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -177,6 +219,12 @@ namespace Hever.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
+            var currentUser = (Users)HttpContext.Session["user"];
+            if (currentUser == null || !currentUser.IsAdmin)
+            {
+                return RedirectToAction("Index", "Error");
+            } 
+
             Users users = db.Users.Find(id);
             db.Users.Remove(users);
             db.SaveChanges();

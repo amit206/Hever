@@ -15,6 +15,13 @@ namespace Hever.Controllers
         // GET: Stats
         public ActionResult Index()
         {
+            var currentUser = (Users)HttpContext.Session["user"];
+            if (currentUser == null || !currentUser.IsAdmin)
+            {
+                return RedirectToAction("Index", "Error");
+            }
+
+            
             var StoresAndResByArea = 
                 db.Stores.GroupBy(s => s.Area)
                 .Select(i => new { city = i.Key.ToString(), count = i.Count() })

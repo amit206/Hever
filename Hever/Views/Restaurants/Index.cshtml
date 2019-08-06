@@ -14,9 +14,9 @@
 
 @if (activeUser != null && activeUser.IsAdmin)
 {
-    <p>
+    <aside style="display: flex;justify-content: flex-end;">
         @Html.ActionLink("Create New Restaurant", "Create")
-    </p>
+    </aside>
 }
 
 <div class="container">

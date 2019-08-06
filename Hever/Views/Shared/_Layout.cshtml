@@ -29,60 +29,63 @@
     <script src="~/Scripts/jquery.validate.unobtrusive.js"></script>
     <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
 </head>
-    <body>
-        <div class="navbar navbar-inverse navbar-fixed-top">
-            <div class="container">
-                <div class="navbar-header">
-                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </button>
-                    
-                    @if (activeUser != null)
-                    {
-                        @Html.ActionLink("Home", "Index", "Home", new { id = activeUser.Id, area = "" }, new { @class = "navbar-brand" })
+<body>
+    <div class="navbar navbar-inverse navbar-fixed-top" style="display:flex; align-items:center;">
+        <img id="logo" src="../../Content/Images/small-logo.png">
+        <div class="container">
 
-                        @Html.ActionLink("Restaurants", "", "Restaurants", new { area = "" }, new { @class = "navbar-brand" })
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
 
-                        @Html.ActionLink("Stores", "", "Stores", new { area = "" }, new { @class = "navbar-brand" })
+                @if (activeUser != null)
+                {
+                    @Html.ActionLink("Home", "Index", "Home", new { id = activeUser.Id, area = "" }, new { @class = "navbar-brand" })
 
-                    }
-                    else
-                    {
-                        @Html.ActionLink("Home", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
-                    }
+                    @Html.ActionLink("Restaurants", "", "Restaurants", new { area = "" }, new { @class = "navbar-brand" })
 
-                    @if (activeUser != null && activeUser.IsAdmin)
-                    {
-                        @Html.ActionLink("Users", "", "Users", new { area = "" }, new { @class = "navbar-brand" })
+                    @Html.ActionLink("Stores", "", "Stores", new { area = "" }, new { @class = "navbar-brand" })
 
-                        @Html.ActionLink("Statistics", "", "Stats", new { area = "" }, new { @class = "navbar-brand" })
-                    }
+                }
+                else
+                {
+                    @Html.ActionLink("Home", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+                }
+
+                @if (activeUser != null && activeUser.IsAdmin)
+                {
+                    @Html.ActionLink("Users", "", "Users", new { area = "" }, new { @class = "navbar-brand" })
+
+                    @Html.ActionLink("Statistics", "", "Stats", new { area = "" }, new { @class = "navbar-brand" })
+                }
 
                 @Html.ActionLink("About", "About", "Home", new { area = "" }, new { @class = "navbar-brand" })
 
-
-                    @if (activeUser == null)
-                    {
-                        @Html.ActionLink("Register", "", "Users/Create", new { area = "" }, new { @class = "navbar-brand" })
-
-                        @Html.ActionLink("Login", "", "Users/Login", new { area = "" }, new { @class = "navbar-brand" })
-                    }
-                    else
-                    {
-                        <span style="color: white !important; font-size: 16px; pointer-events: none;">
-                            Welcome @(activeUser.UserName)
-                        </span>
-
-                        @Html.ActionLink("Logoff", "", "Users/Logout", new { area = "" }, new { @class = "navbar-brand" })
-                    }
-                </div>
-                <div class="navbar-collapse collapse">
-                    <ul class="nav navbar-nav"></ul>
-                </div>
+            </div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav"></ul>
             </div>
         </div>
+        <div class="container">
+            @if (activeUser == null)
+            {
+                @Html.ActionLink("Register", "", "Users/Create", new { area = "" }, new { @class = "navbar-brand" })
+
+                @Html.ActionLink("Login", "", "Users/Login", new { area = "" }, new { @class = "navbar-brand" })
+            }
+            else
+            {
+                <span class="welcome-text">
+                    Welcome @(activeUser.UserName)
+                </span>
+
+                @Html.ActionLink("Logoff", "", "Users/Logout", new { area = "" }, new { @class = "navbar-brand" })
+            }
+        </div>
+    </div>
 
     <div class="container body-content">
         <div>
@@ -101,6 +104,16 @@
 
     <script src="~/Scripts/jquery-1.10.2.min.js"></script>
     <script src="~/Scripts/bootstrap.min.js"></script>
-    <script src="~/Scripts/weather.js"></script>
+    <script>
+        var canvasObject = document.getElementById('logo');
+        var canvasContext = canvasObject.getContext('2d');
+        var imageObject = new Image();
+
+        imageObject.src = '../../Content/Image/small-logo.png';
+
+        imageObject.onload = function () {
+            canvasContext.drawImage(imageObject, 10, 30);
+        };
+    </script>
 </body>
 </html>

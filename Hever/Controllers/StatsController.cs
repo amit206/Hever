@@ -21,7 +21,6 @@ namespace Hever.Controllers
                 return RedirectToAction("Index", "Error");
             }
 
-            
             var StoresAndResByArea = 
                 db.Stores.GroupBy(s => s.Area)
                 .Select(i => new { city = i.Key.ToString(), count = i.Count() })

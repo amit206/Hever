@@ -37,6 +37,11 @@ namespace Hever.Controllers
                     var recommRes = db.Restaurants.Where(rst => rst.LikedUsers.Any(l => usersRes.Contains(l.Id))
                                     && !rst.LikedUsers.Select(rid => rid.Id).Contains((int)id)).Take(numOfRecords).ToList();
 
+                    if(recommRes.Count() == 0)
+                    {
+                        recommRes = db.Restaurants.OrderBy(res => likedRes.Count()).Take(1).ToList();
+                    }
+
                     // Stores
                     // Get all the stores that current user likes
                     IEnumerable<int> likedStore = db.Users.Where(u => u.Id == id).Select(p => p.LikedStores.Select(res => res.Id)).SingleOrDefault().ToList();
@@ -49,6 +54,10 @@ namespace Hever.Controllers
                     var recommStores = db.Stores.Where(str => str.LikedUsers.Any(l => usersStore.Contains(l.Id))
                                     && !str.LikedUsers.Select(stid => stid.Id).Contains((int)id)).Take(numOfRecords).ToList();
 
+                    if (recommStores.Count() == 0)
+                    {
+                        recommStores = db.Stores.OrderBy(res => likedStore.Count()).Take(1).ToList();
+                    }
 
                     ViewBag.recommendedRestaurants = recommRes;
                     ViewBag.recommendedStores = recommStores;

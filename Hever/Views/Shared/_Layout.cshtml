@@ -59,6 +59,10 @@
                 {
                     @Html.ActionLink("Users", "", "Users", new { area = "" }, new { @class = "navbar-brand" })
 
+                }
+
+                @if (activeUser != null)
+                {
                     @Html.ActionLink("Statistics", "", "Stats", new { area = "" }, new { @class = "navbar-brand" })
                 }
 

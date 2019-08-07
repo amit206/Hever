@@ -101,6 +101,14 @@
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\Images\logo.png" />
+    <Content Include="Content\Images\pin-small.jpg" />
+    <Content Include="Content\Images\pin.jpg" />
+    <Content Include="Content\Images\restaurant.png" />
+    <Content Include="Content\Images\small-logo.png" />
+    <Content Include="Content\Images\store.jpg" />
+    <Content Include="Content\Image\logo.png" />
+    <Content Include="Content\Image\small-logo.png" />
     <Content Include="Content\Site.css" />
     <Content Include="Content\videos\song.mp4" />
     <Content Include="fonts\font-awesome-4.7.0\css\font-awesome.css" />
@@ -273,6 +281,14 @@
     <Compile Include="Migrations\201908011324230_20190801_Migration38.Designer.cs">
       <DependentUpon>201908011324230_20190801_Migration38.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201908071414298_20190819_Amit_Annotations.cs" />
+    <Compile Include="Migrations\201908071414298_20190819_Amit_Annotations.Designer.cs">
+      <DependentUpon>201908071414298_20190819_Amit_Annotations.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201908071419512_20190819_Amit_Annotations2.cs" />
+    <Compile Include="Migrations\201908071419512_20190819_Amit_Annotations2.Designer.cs">
+      <DependentUpon>201908071419512_20190819_Amit_Annotations2.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\HeverDbContext.cs" />
     <Compile Include="Models\Restaurant.cs" />
@@ -346,6 +362,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201908011324230_20190801_Migration38.resx">
       <DependentUpon>201908011324230_20190801_Migration38.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201908071414298_20190819_Amit_Annotations.resx">
+      <DependentUpon>201908071414298_20190819_Amit_Annotations.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201908071419512_20190819_Amit_Annotations2.resx">
+      <DependentUpon>201908071419512_20190819_Amit_Annotations2.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

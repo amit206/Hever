@@ -13,6 +13,7 @@ namespace Hever.Controllers
     public class StoresController : Controller
     {
         private HeverDbContext db = new HeverDbContext();
+        private List<Store> curList;
 
         // GET: Stores
         public ActionResult Index()
@@ -20,7 +21,7 @@ namespace Hever.Controllers
             var currentUser = (Users)HttpContext.Session["user"];
             if (currentUser == null)
             {
-                return RedirectToAction("Index", "Error");
+                return RedirectToAction("Index", "Error", new { message = "You are not logged in" });
             }
 
             ViewBag.storeTypeList = db.Stores.Select(s => s.StoreType).Distinct();
@@ -37,7 +38,7 @@ namespace Hever.Controllers
             var currentUser = (Users)HttpContext.Session["user"];
             if (currentUser == null)
             {
-                return RedirectToAction("Index", "Error");
+                return RedirectToAction("Index", "Error", new { message = "You are not logged in" });
             }
 
             ViewBag.storeTypeList = db.Stores.Select(s => s.StoreType).Distinct();
@@ -70,7 +71,7 @@ namespace Hever.Controllers
             var currentUser = (Users)HttpContext.Session["user"];
             if (currentUser == null)
             {
-                return RedirectToAction("Index", "Error");
+                return RedirectToAction("Index", "Error", new { message = "You are not logged in" });
             }
 
             if (id == null)
@@ -205,7 +206,7 @@ namespace Hever.Controllers
         {
             ViewBag.storeTypeList = db.Stores.Select(s => s.StoreType).Distinct();
             ViewBag.areaList = db.Stores.Select(s => s.Area).Distinct();
-
+            
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);

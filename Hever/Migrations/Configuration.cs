@@ -26,9 +26,12 @@ namespace Hever.Migrations
 
             context.Users.Add(new Users() {Id=1, UserName = "Einor", Password="Einor", IsAdmin = true });
             context.Users.Add(new Users() {Id=2, UserName = "Amit", Password= "Amit", IsAdmin = true });
-            context.Users.Add(new Users() {Id=3, UserName = "1", Password="1", IsAdmin = true });
-            context.Users.Add(new Users() {Id=4, UserName = "2", Password="2", IsAdmin = false });
-            context.Users.Add(new Users() {Id=5, UserName = "3", Password="3", IsAdmin = false });
+            context.Users.Add(new Users() {Id=3, UserName = "Alice", Password= "Alice", IsAdmin = false });
+            context.Users.Add(new Users() {Id=4, UserName = "Tom", Password= "Tom", IsAdmin = false });
+            context.Users.Add(new Users() {Id=5, UserName = "Eden", Password= "Eden", IsAdmin = false });
+            context.Users.Add(new Users() {Id=6, UserName = "Coral", Password= "Coral", IsAdmin = false });
+            context.Users.Add(new Users() {Id=7, UserName = "Dana", Password= "Dana", IsAdmin = false });
+            context.Users.Add(new Users() {Id=8, UserName = "Beni", Password = "Beni", IsAdmin = false });
 
             context.Stores.Add(new Store() { Id = 1, Name = "YOLO", FullAddress = "Yizchak Rabin 53 Ramat Gan", IsAccessible = true, StoreType = "Books", Area = "Center" });
             context.Stores.Add(new Store() { Id = 2, Name = "YOLO", FullAddress = "Atir Yeda 4 Kfar Saba", IsAccessible = false, StoreType = "Books", Area = "Sharon" });

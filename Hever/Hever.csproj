@@ -107,8 +107,6 @@
     <Content Include="Content\Images\restaurant.png" />
     <Content Include="Content\Images\small-logo.png" />
     <Content Include="Content\Images\store.jpg" />
-    <Content Include="Content\Image\logo.png" />
-    <Content Include="Content\Image\small-logo.png" />
     <Content Include="Content\Site.css" />
     <Content Include="Content\videos\song.mp4" />
     <Content Include="fonts\font-awesome-4.7.0\css\font-awesome.css" />

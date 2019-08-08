@@ -20,7 +20,7 @@ namespace Hever.Controllers
             var currentUser = (Users)HttpContext.Session["user"];
             if (currentUser == null)
             {
-                return RedirectToAction("Index", "Error");
+                return RedirectToAction("Index", "Error", new { message = "You are not logged in" });
             }
 
             ViewBag.restaurantTypeList = db.Restaurants.Select(r => r.RestaurantType).Distinct();
@@ -36,7 +36,7 @@ namespace Hever.Controllers
             var currentUser = (Users)HttpContext.Session["user"];
             if (currentUser == null)
             {
-                return RedirectToAction("Index", "Error");
+                return RedirectToAction("Index", "Error", new { message = "You are not logged in" });
             }
 
             ViewBag.restaurantTypeList = db.Restaurants.Select(r => r.RestaurantType).Distinct();
@@ -95,7 +95,7 @@ namespace Hever.Controllers
             var currentUser = (Users)HttpContext.Session["user"];
             if (currentUser == null || !currentUser.IsAdmin)
             {
-                return RedirectToAction("Index", "Error");
+                return RedirectToAction("Index");
             }
 
             return View();

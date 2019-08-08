@@ -106,7 +106,7 @@ namespace Hever.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Name,FullAddress,IsAccessible,IsKosher,RestaurantType,Area")] Restaurant restaurant)
+        public ActionResult Create([Bind(Include = "Id,Name,FullAddress,Area,IsAccessible,IsKosher,RestaurantType")] Restaurant restaurant)
         {
             var currentUser = (Users)HttpContext.Session["user"];
             if (currentUser == null || !currentUser.IsAdmin)
@@ -150,7 +150,7 @@ namespace Hever.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Name,FullAddress,IsAccessible,IsKosher,RestaurantType,Area")] Restaurant restaurant)
+        public ActionResult Edit([Bind(Include = "Id,Name,FullAddress,Area,IsAccessible,IsKosher,RestaurantType")] Restaurant restaurant)
         {
             var currentUser = (Users)HttpContext.Session["user"];
             if (currentUser == null || !currentUser.IsAdmin)

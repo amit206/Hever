@@ -30,17 +30,9 @@ else
                 <strong>For You!</strong>
             </h2>
             <hr>
-            @if (Enumerable.Count(ViewBag.recommendedRestaurants) == 0)
-            {
-                <div class='col-md-offset-2 col-md-8 text-center'>
-                    <h3>No Recommendations for you now</h3>
-                    <h3>If you want Recommendations you need to Like some restaurants</h3>
-                </div>
-            }
-            else
-            {
+
                 <div class='row'>
-                    <div class='col-md-offset-2 col-md-8'>
+                    <div class='col-md-offset-1 col-sm-5'>
                         <div class="carousel slide quote-carousel" data-ride="carousel" id="quote-carousel">
                             <!--Carousel Slides / Quotes -->
                             <div class="carousel-inner">
@@ -54,9 +46,9 @@ else
                                             <blockquote>
                                                 <div class="row">
                                                     <div class="col-sm-3 text-center">
-                                                        <img class="img-circle" src="http://www.reactiongifs.com/r/overbite.gif" style="width: 100px;height:100px;">
+                                                        <img class="img-circle" src="~/Content/Images/restaurant.png" style="width: 100px;height:100px;">
                                                     </div>
-                                                    <div class="col-sm-5">
+                                                    <div class="col-sm-8 col-md-offset-1 ">
                                                         <p>@res.RestaurantType - @res.Name</p>
                                                         <small>@res.FullAddress</small>
                                                         @if (res.IsAccessible)
@@ -86,9 +78,9 @@ else
                                             <blockquote>
                                                 <div class="row">
                                                     <div class="col-sm-3 text-center">
-                                                        <img class="img-circle" src="https://s3.amazonaws.com/uifaces/faces/twitter/mijustin/128.jpg" style="width: 100px;height:100px;">
+                                                        <img class="img-circle" src="~/Content/Images/restaurant.png" style="width: 100px;height:100px;">
                                                     </div>
-                                                    <div class="col-sm-5">
+                                                    <div class="col-sm-8 col-md-offset-1 ">
                                                         <p>@res.RestaurantType - @res.Name</p>
                                                         <small>@res.FullAddress</small>
                                                         @if (res.IsAccessible)
@@ -120,27 +112,7 @@ else
                             <a data-slide="next" href="#quote-carousel" class="right carousel-control" style="background-image: linear-gradient(to right,rgba(0,0,0,0) 0,rgba(0,0,0,0) 100%);color:#222; font-size: 2.3em"><i class="fa fa-chevron-right"></i></a>
                         </div>
                     </div>
-                </div>
-            }
-        </div>
-    <br />
-    <div class="container">
-        <div class="row">
-            <div class='col-md-offset-2 col-md-8 text-center'>
-                <h2>Stores Recommendations for you!</h2>
-            </div>
-        </div>
-        @if (Enumerable.Count(ViewBag.recommendedStores) == 0)
-        {
-            <div class='col-md-offset-2 col-md-8 text-center'>
-                <h3>No Recommendations for you now</h3>
-                <h3>If you want Recommendations you need to Like some stores</h3>
-                </div>
-                }
-                else
-                {
-                <div class='row'>
-                    <div class='col-md-offset-2 col-md-8'>
+                    <div class='col-md-offset-1 col-md-5'>
                         <div class="carousel slide quote-carousel" data-ride="carousel" id="quote-carousela">
                             <!--Carousel Slides / Quotes -->
                             <div class="carousel-inner">
@@ -154,9 +126,9 @@ else
                                             <blockquote>
                                                 <div class="row">
                                                     <div class="col-sm-3 text-center">
-                                                        <img class="img-circle" src="http://www.reactiongifs.com/r/overbite.gif" style="width: 100px;height:100px;">
+                                                        <img class="img-circle" src="~/Content/Images/store.jpg" style="width: 100px;height:100px;">
                                                     </div>
-                                                    <div class="col-sm-5">
+                                                    <div class="col-sm-8 col-md-offset-1 ">
                                                         <p>@store.StoreType - @store.Name</p>
                                                         <small>@store.FullAddress</small>
                                                         @if (store.IsAccessible)
@@ -178,9 +150,9 @@ else
                                             <blockquote>
                                                 <div class="row">
                                                     <div class="col-sm-3 text-center">
-                                                        <img class="img-circle" src="https://s3.amazonaws.com/uifaces/faces/twitter/mijustin/128.jpg" style="width: 100px;height:100px;">
+                                                        <img class="img-circle" src="~/Content/Images/store.jpg" style="width: 100px;height:100px;">
                                                     </div>
-                                                    <div class="col-sm-5">
+                                                    <div class="col-sm-8 col-md-offset-1 ">
                                                         <p>@store.StoreType - @store.Name</p>
                                                         <small>@store.FullAddress</small>
                                                         @if (store.IsAccessible)
@@ -205,18 +177,10 @@ else
                         </div>
                     </div>
                 </div>
-                }
             </div>
         }
 
         <script>
-            $(document).ready(function () {
-                //Set the carousel options
-                $('#quote-carousel2').carousel({
-                    pause: true,
-                    interval: 4000,
-                });
-            });
             $(document).ready(function () {
                 //Set the carousel options
                 $('#quote-carousela').carousel({

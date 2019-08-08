@@ -16,12 +16,13 @@ namespace Hever.Controllers
         public ActionResult Index()
         {
             var currentUser = (Users)HttpContext.Session["user"];
-            if (currentUser == null || !currentUser.IsAdmin)
+            if (currentUser == null)
             {
                 return RedirectToAction("Index", "Error");
             }
 
-            var StoresAndResByArea = 
+
+            /*var StoresAndResByArea = 
                 db.Stores.GroupBy(s => s.Area)
                 .Select(i => new { city = i.Key.ToString(), count = i.Count() })
 
@@ -30,14 +31,21 @@ namespace Hever.Controllers
 
                 .GroupBy(s => s.city)
                 .Select(i => new { city = i.Key, count = i.Sum(s => s.count) })
+                .ToList();*/
+            var StoresAndResByArea =
+                db.Stores.Select(s => new { city = s.Area })
+                .Concat(db.Restaurants.Select(r => new { city = r.Area }))
+                .GroupBy(s => s.city)
+                .Select(i => new { city = i.Key, count = i.Count() })
                 .ToList();
             var GroupByStoresAndResJson = JsonConvert.SerializeObject(StoresAndResByArea);
             ViewBag.GroupByAreaJson = GroupByStoresAndResJson;
 
-            var TypeOfLikedRestaurants = db.Restaurants.Where(u => u.LikedUsers.Count() != 0)
-                .GroupBy(r=> r.RestaurantType)
-                
-                .Select(i => new { type = i.Key.ToString(), count = i.Count() }).ToList();
+            var TypeOfLikedRestaurants = db.Restaurants.Where(r => r.LikedUsers.Count() != 0)
+                .Select(i => new { type = i.RestaurantType, count = i.LikedUsers.Count() })
+                .GroupBy(r => r.type)
+                .Select(i => new { type = i.Key.ToString(), count = i.Sum(s => s.count) })
+                .ToList();
             var TypeOfLikedRestaurantsJSON = JsonConvert.SerializeObject(TypeOfLikedRestaurants);
             ViewBag.TypeOfLikedRestaurantsJSON = TypeOfLikedRestaurantsJSON;
 

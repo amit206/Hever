@@ -13,6 +13,7 @@ namespace Hever.Controllers
     public class StoresController : Controller
     {
         private HeverDbContext db = new HeverDbContext();
+        private List<Store> curList;
 
         // GET: Stores
         public ActionResult Index()
@@ -20,7 +21,7 @@ namespace Hever.Controllers
             var currentUser = (Users)HttpContext.Session["user"];
             if (currentUser == null)
             {
-                return RedirectToAction("Index", "Error");
+                return RedirectToAction("Index", "Error", new { message = "You are not logged in" });
             }
 
             ViewBag.storeTypeList = db.Stores.Select(s => s.StoreType).Distinct();
@@ -37,7 +38,7 @@ namespace Hever.Controllers
             var currentUser = (Users)HttpContext.Session["user"];
             if (currentUser == null)
             {
-                return RedirectToAction("Index", "Error");
+                return RedirectToAction("Index", "Error", new { message = "You are not logged in" });
             }
 
             ViewBag.storeTypeList = db.Stores.Select(s => s.StoreType).Distinct();
@@ -70,7 +71,7 @@ namespace Hever.Controllers
             var currentUser = (Users)HttpContext.Session["user"];
             if (currentUser == null)
             {
-                return RedirectToAction("Index", "Error");
+                return RedirectToAction("Index", "Error", new { message = "You are not logged in" });
             }
 
             if (id == null)
@@ -102,7 +103,7 @@ namespace Hever.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Name,FullAddress,IsAccessible,StoreType,Area")] Store store)
+        public ActionResult Create([Bind(Include = "Id,Name,FullAddress,Area,IsAccessible,StoreType")] Store store)
         {
             var currentUser = (Users)HttpContext.Session["user"];
             if (currentUser == null || !currentUser.IsAdmin)
@@ -146,7 +147,7 @@ namespace Hever.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Name,FullAddress,IsAccessible,StoreType,Area")] Store store)
+        public ActionResult Edit([Bind(Include = "Id,Name,FullAddress,Area,IsAccessible,StoreType")] Store store)
         {
             var currentUser = (Users)HttpContext.Session["user"];
             if (currentUser == null || !currentUser.IsAdmin)
@@ -205,7 +206,7 @@ namespace Hever.Controllers
         {
             ViewBag.storeTypeList = db.Stores.Select(s => s.StoreType).Distinct();
             ViewBag.areaList = db.Stores.Select(s => s.Area).Distinct();
-
+            
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);

@@ -18,7 +18,7 @@ namespace Hever.Controllers
             var currentUser = (Users)HttpContext.Session["user"];
             if (currentUser == null)
             {
-                return RedirectToAction("Index", "Error");
+                return RedirectToAction("Index", "Error", new { message = "You are not logged in" });
             }
 
 

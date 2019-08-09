@@ -17,7 +17,6 @@
     <link href="~/Content/bootstrap-theme.min.css" rel="stylesheet" />
     <link href="~/Content/bootstrap.css" rel="stylesheet" />
     <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
-    <link href="~/Content/login.css" rel="stylesheet" />
     <link href="~/Content/Site.css" rel="stylesheet" />
     <script src="~/Scripts/bootstrap.js"></script>
     <script src="~/Scripts/bootstrap.min.js"></script>
@@ -31,7 +30,7 @@
 </head>
 <body>
     <div class="navbar navbar-inverse navbar-fixed-top" style="display:flex; align-items:center;">
-        <img id="logo" src="../../Content/Images/small-logo.png">
+        <img id="logo" style="padding-left:60px;" src="../../Content/Images/small-logo.png">
         <div class="container">
 
             <div class="navbar-header">
@@ -82,11 +81,12 @@
             }
             else
             {
-                <span class="welcome-text">
+                <span class="welcome-text" style="float: left;padding: 15px 15px;font-size: 18px;line-height: 20px;">
                     Welcome @(activeUser.UserName)
                 </span>
 
                 @Html.ActionLink("Logoff", "", "Users/Logout", new { area = "" }, new { @class = "navbar-brand" })
+
             }
         </div>
     </div>
@@ -108,16 +108,6 @@
 
     <script src="~/Scripts/jquery-1.10.2.min.js"></script>
     <script src="~/Scripts/bootstrap.min.js"></script>
-    <script>
-        var canvasObject = document.getElementById('logo');
-        var canvasContext = canvasObject.getContext('2d');
-        var imageObject = new Image();
 
-        imageObject.src = '../../Content/Image/small-logo.png';
-
-        imageObject.onload = function () {
-            canvasContext.drawImage(imageObject, 10, 30);
-        };
-    </script>
 </body>
 </html>

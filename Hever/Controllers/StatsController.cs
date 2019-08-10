@@ -21,17 +21,6 @@ namespace Hever.Controllers
                 return RedirectToAction("Index", "Error", new { message = "You are not logged in" });
             }
 
-
-            /*var StoresAndResByArea = 
-                db.Stores.GroupBy(s => s.Area)
-                .Select(i => new { city = i.Key.ToString(), count = i.Count() })
-
-                .Union(db.Restaurants.GroupBy(s => s.Area)
-                .Select(i => new { city = i.Key.ToString() , count = i.Count() }))
-
-                .GroupBy(s => s.city)
-                .Select(i => new { city = i.Key, count = i.Sum(s => s.count) })
-                .ToList();*/
             var StoresAndResByArea =
                 db.Stores.Select(s => new { city = s.Area })
                 .Concat(db.Restaurants.Select(r => new { city = r.Area }))

@@ -88,7 +88,7 @@ namespace Hever.Controllers
                     if (System.Web.HttpContext.Current.Session["user"] == null)
                     {
                         System.Web.HttpContext.Current.Session["user"] = user;
-                        return RedirectToAction("Index", "Stores");
+                        return RedirectToAction("Index", "Home");
                     }
                     else
                     {

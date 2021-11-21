@@ -3,6 +3,8 @@ id: 7sohm
 name: blaa
 file_version: 1.0.2
 app_version: 0.6.6-1
+file_blobs:
+  .gitignore: 48a07ae1f7bbfcae13fe51a497984326283bfc7e
 ---
 
 ## hello
@@ -12,6 +14,14 @@ app_version: 0.6.6-1
 2.  will
     
 3.  work
+
+<br/>
+
+<!-- NOTE-swimm-snippet: the lines below link your snippet to Swimm -->
+### 📄 .gitignore
+```gitignore
+🟩 10     # User-specific files (MonoDevelop/Xamarin Studio)
+```
 
 <br/>
 
